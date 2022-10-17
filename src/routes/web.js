@@ -15,7 +15,7 @@ let initRouter = (app) => {
     router.post("/register", user.regissterUser ); 
     router.post("/login-user", user.loginUser); 
 
-    // router.get("/product/", product.getCategory);
+    router.post("/add-new-product/", product.createNewProduct);
 
     router.post("/add-new-category", category.createNewCategory); 
     router.get("/category", category.getNormalCategoies); 

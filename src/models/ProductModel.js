@@ -21,7 +21,9 @@ let ProductSchema = new Schema({
 }); 
 
 ProductSchema.statics = {
-
+    createNew(item){
+        return this.create(item); 
+    }
 };
 
 export default mongoose.model("product", ProductSchema) ; 
