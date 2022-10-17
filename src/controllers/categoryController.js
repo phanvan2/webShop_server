@@ -3,14 +3,15 @@ import _ from "lodash" ;
 
 import { transError, transSuccess, transValidation } from "../../lang/vi";
 import {category} from "../services/index"; 
+import {app} from "../config/app"; 
 
 let storageAvatar = multer.diskStorage({
     destination: (req, file , cb) => {
-        cb(null , "src/public/images/categories");
+        cb(null , app.image_category_directory);
     },
     filename: (req , file , cb) => {
         try{
-            let math = ['image/png', "image/jpg", "image/jpeg"]; 
+            let math = app.image_type; 
             if(math.indexOf(file.mimetype) === -1){
                 return cb("lỗi chọn file", null ,  )
             }
@@ -39,7 +40,8 @@ let createNewCategory = (req, res)=>{
         }else{
             let newItem = {
                 nameCategory: req.body.nameCategory,
-                imageCategory: req.file.filename
+                imageCategory: req.file.filename,
+                idUser: req.body.idUser
                 
             }; 
             let checkCategory = await category.getCategoryByName(newItem.nameCategory) ; 

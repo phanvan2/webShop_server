@@ -12,7 +12,8 @@ export const transSuccess = {
     },
     addNewCategory: (nameCategory) => {
         return `Phân loại <b> ${nameCategory}</b> đã được thêm thành công`;
-    }
+    },
+    addNewProduct: "Thêm sản phẩm thành công",
 
 }; 
 
@@ -24,6 +25,8 @@ export const transError = {
     upImage: "Lỗi không tải ảnh lên được", 
     addNewCategory: (nameCategory) => {
         return `Thêm phân loại </b>${nameCategory}</b> thất bại`;
-    }
+    },
+    addNewProduct: "Thêm sản phẩm thất bại, Vui lòng thử lại sau",
+
 
 }
