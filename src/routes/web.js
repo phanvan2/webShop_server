@@ -1,5 +1,5 @@
 import express from "express"; 
-import { user} from "../controllers/index" ; 
+import { user, product, category} from "../controllers/index" ; 
 
 let router = express.Router(); 
 
@@ -14,7 +14,11 @@ let initRouter = (app) => {
 
     router.post("/register", user.regissterUser ); 
     router.post("/login-user", user.loginUser); 
-    
+
+    // router.get("/product/", product.getCategory);
+
+    router.post("/add-new-category", category.createNewCategory); 
+    router.get("/category", category.getNormalCategoies); 
     return app.use("/", router);
 }
 export default initRouter; 

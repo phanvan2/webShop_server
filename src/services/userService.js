@@ -1,5 +1,7 @@
 import userModel from "../models/userModel" ;
+import { transValidation, transSuccess } from "../../lang/vi";
 import bcrypt from "bcrypt"; 
+
 let createNew =  (item ) => {
     return new Promise(async (resolve, reject) => {
         try{
@@ -30,7 +32,7 @@ let loginUser = (item) => {
         try {
             let userItem = await userModel.findByEmail( item.email); 
             if(!userItem){
-                resolve("mật khẩu hoặc tài khoản của bạn ko đúng");
+                resolve(false);
             }else{
 
                 let checkPass = bcrypt.compareSync(item.password, userItem.local.password );
@@ -45,13 +47,13 @@ let loginUser = (item) => {
                     }
                     resolve(userInfor);
                 }else{
-                    resolve("mật khẩu hoặc tài khoản của bạn ko đúng")
+                    resolve(false)
                 }
 
             }
-            resolve(userItem); 
+            resolve(false); 
         } catch (error) {
-            reject(err); 
+            reject(false); 
 
         }
     })
