@@ -24,14 +24,22 @@ let loginUser = async(req, res) => {
     if(_.isEmpty(req.body)){
         res.status(400).send("Không tìm thấy dữ liệu")
     }else {
-        let result = await user.loginUser(req.body); 
-        if(result){
-            res.status(200).send(result); 
-
-        }else{
-            res.status(500).send(transError.login_user); 
+        try {
+            let result = await user.loginUser(req.body); 
+            console.log(result);
+            if(result){
+                res.status(200).send(result); 
+    
+            }else{
+                res.status(500).send(transError.login_user); 
+    
+            }
+        } catch (error) {
+            res.status(500).send(error); 
 
         }
+ 
+        
     }
 }
 export default  {regissterUser, loginUser} ; 

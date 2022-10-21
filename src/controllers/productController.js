@@ -40,7 +40,7 @@ let createNewProduct = (req , res) => {
                 nameProduct: req.body.nameProduct,
                 idSeller: req.body.idUser,
                 idCategory: req.body.idCategory,
-                imageProduct: req.file.originalname,
+                imageProduct: req.file.filename,
                 classify: {
                     color: req.body.color,
                     size: req.body.size,
@@ -61,4 +61,27 @@ let createNewProduct = (req , res) => {
     }); 
 }
 
-export default {createNewProduct}; 
+let getProductById = async(req, res) => {
+    if(req.query.idProduct){
+        try {
+            let result = await product.getProductById(req.query.idProduct) ; 
+            if(result){
+                res.status(500).send(result); 
+            }else{  
+                res.status(500).send(transError.product_detail)
+            }
+        } catch (error) {
+            res.status(500).send(transError.product_detail)
+
+        }
+       
+    }
+    res.status(500).send()
+}
+
+let getAllProduct = async( req, res) => {
+    console.log(req.query);
+    res.send(req.params) ;
+} ; 
+
+export default {createNewProduct, getProductById, getAllProduct}; 

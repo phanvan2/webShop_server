@@ -30,14 +30,11 @@ let createNew =  (item ) => {
 let loginUser = (item) => {
     return new Promise(async (resolve, reject) => {
         try {
+            console.log("hello login"); 
             let userItem = await userModel.findByEmail( item.email); 
-            if(!userItem){
-                resolve(false);
-            }else{
-
-                let checkPass = bcrypt.compareSync(item.password, userItem.local.password );
-                console.log("check passs"); 
-                console.log(checkPass); 
+            console.log(userItem);
+            if(userItem){
+                let checkPass = bcrypt.compareSync(item.password + "", userItem.local.password + "");
                 if(checkPass){
                     let userInfor = {
                         idUser : userItem._id,
@@ -47,11 +44,11 @@ let loginUser = (item) => {
                     }
                     resolve(userInfor);
                 }else{
-                    resolve(false)
+                    resolve(false);
                 }
-
+            }else{
+                resolve(false);
             }
-            resolve(false); 
         } catch (error) {
             reject(false); 
 

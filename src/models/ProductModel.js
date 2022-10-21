@@ -23,6 +23,15 @@ let ProductSchema = new Schema({
 ProductSchema.statics = {
     createNew(item){
         return this.create(item); 
+    }, 
+
+    findProductById(idProduct){
+        return this.findById(idProduct).exec(); 
+        
+    },
+
+    findAllProduct(skipNumber){
+        return this.find
     }
 };
 

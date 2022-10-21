@@ -14,4 +14,26 @@ let addNewProduct = (newItem) => {
     }); 
 }; 
 
-export default {addNewProduct}; 
+let getProductById = (idProduct) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let result = await ProductModel.findProductById(idProduct) ; 
+            if(result)
+            resolve(result); 
+            else 
+            resolve(false)
+        } catch (error) {
+            reject(false)
+        }
+        
+
+    })
+}
+
+let getAllProduct = (page) => {
+    return new Promise(async (resolve, reject) => {
+        
+    }); 
+}
+
+export default {addNewProduct, getProductById}; 
