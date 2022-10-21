@@ -18,15 +18,16 @@ export const transSuccess = {
 }; 
 
 export const transError = {
-    login_user: "Đăng nhập thất bại", 
-    register_user: "Đăng ký thất bại",
+    login_user: "Đăng nhập thất bại.", 
+    register_user: "Đăng ký thất bại.",
 
-    getCategory: "Không tìm thấy dữ liệu",
-    upImage: "Lỗi không tải ảnh lên được", 
+    getCategory: "Không tìm thấy dữ liệu.",
+    upImage: "Lỗi không tải ảnh lên được.", 
     addNewCategory: (nameCategory) => {
-        return `Thêm phân loại </b>${nameCategory}</b> thất bại`;
+        return `Thêm phân loại </b>${nameCategory}</b> thất bại.`;
     },
-    addNewProduct: "Thêm sản phẩm thất bại, Vui lòng thử lại sau",
+    addNewProduct: "Thêm sản phẩm thất bại, Vui lòng thử lại sau.",
+    product_detail: "Rất tiếc chúng tôi không tìm thấy sản phẩm này.",
 
 
 }
