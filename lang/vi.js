@@ -28,6 +28,7 @@ export const transError = {
     },
     addNewProduct: "Thêm sản phẩm thất bại, Vui lòng thử lại sau.",
     product_detail: "Rất tiếc chúng tôi không tìm thấy sản phẩm này.",
+    error_data: "Rất tiếc, đã xảy ra lỗi. Vui lòng kiểm tra lại đầu vào."
 
 
 }

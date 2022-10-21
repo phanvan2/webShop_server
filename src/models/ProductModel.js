@@ -30,8 +30,12 @@ ProductSchema.statics = {
         
     },
 
-    findAllProduct(skipNumber){
-        return this.find
+    findAllProduct(skipNumber, product_limit){
+        return this.find().skip(skipNumber).limit(product_limit).exec();
+    },
+
+    getCountProduct(){
+        return this.count(); 
     }
 };
 
