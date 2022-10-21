@@ -80,8 +80,14 @@ let getProductById = async(req, res) => {
 }
 
 let getAllProduct = async( req, res) => {
-    console.log(req.query);
-    res.send(req.params) ;
+    if(req.params.page){
+        let result = await product.getAllProduct(req.params.page); 
+        if(result){
+            res.status(200).send(result);
+        }else{
+            res.status(500).send(transError.error_data);
+        }
+    }
 } ; 
 
 export default {createNewProduct, getProductById, getAllProduct}; 
