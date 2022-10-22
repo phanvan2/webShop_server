@@ -90,4 +90,8 @@ let getAllProduct = async( req, res) => {
     }
 } ; 
 
-export default {createNewProduct, getProductById, getAllProduct}; 
+
+let getFile = function(req, res) {
+    res.download('src/public/images/product/' + req.params.path);
+}
+export default {createNewProduct, getProductById, getAllProduct, getFile}; 

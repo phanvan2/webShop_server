@@ -11,7 +11,7 @@ let initRouter = (app) => {
     router.get("/", function(req, res){
         res.send("trang chủ");
     }); 
-
+    router.get('/images/product/:path', product.getFile); 
     router.post("/register", user.regissterUser ); 
     router.post("/login-user", user.loginUser); 
 
