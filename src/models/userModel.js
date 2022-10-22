@@ -33,6 +33,14 @@ userSchema.statics = {
 
     findByEmail(emailUser){
         return this.findOne({"local.email": emailUser}).exec();
-    }
+    },
+
+    updateInfor(idUser, item){
+        return this.findByIdAndUpdate(idUser, item).exec();
+    },
+    findUserById(idUser){
+        return this.findById(idUser).exec();
+    },
+  
 }
 export default mongoose.model("user", userSchema) ; 

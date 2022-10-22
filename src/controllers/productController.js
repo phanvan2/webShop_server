@@ -66,7 +66,7 @@ let getProductById = async(req, res) => {
         try {
             let result = await product.getProductById(req.query.idProduct) ; 
             if(result){
-                res.status(500).send(result); 
+                res.status(200).send(result); 
             }else{  
                 res.status(500).send(transError.product_detail)
             }
@@ -90,4 +90,8 @@ let getAllProduct = async( req, res) => {
     }
 } ; 
 
-export default {createNewProduct, getProductById, getAllProduct}; 
+let getFileImage = function(req, res) {
+    res.download('src/public/images/products/' + req.params.path);
+}
+
+export default {createNewProduct, getProductById, getAllProduct, getFileImage}; 
