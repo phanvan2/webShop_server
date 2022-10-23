@@ -112,7 +112,7 @@ let checkPassUser = async(req, res) => {
         if(result){
             res.status(200).send(true);
         }else{
-            res.status(500).send(false);
+            res.status(200).send(false);
         }
     }
 }

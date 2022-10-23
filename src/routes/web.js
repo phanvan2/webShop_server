@@ -1,5 +1,6 @@
 import express from "express"; 
 import { user, product, category} from "../controllers/index" ; 
+import getFileImage from "../helpers/getFile";
 
 let router = express.Router(); 
 
@@ -21,7 +22,7 @@ let initRouter = (app) => {
     router.post("/add-new-product/", product.createNewProduct);
     router.get("/detail-product", product.getProductById);
     router.get("/all-product/:page", product.getAllProduct) ; 
-    router.get('/images/product/:path', product.getFileImage); 
+    router.get('/images/:path/:name_image', getFileImage); 
 
     router.post("/add-new-category", category.createNewCategory); 
     router.get("/category", category.getNormalCategoies); 
