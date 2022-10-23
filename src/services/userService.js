@@ -43,7 +43,12 @@ let loginUser = (item) => {
                     let userInfor = {
                         idUser : userItem._id,
                         username: userItem.username,
-                        email: userItem.local.email
+                        email: userItem.local.email,
+                        address: userItem.address,
+                        avatar: userItem.avatar,
+                        role: userItem.role,
+                        createAt: userItem.createAt,
+                        gender: userItem.gender
                         
                     }
                     resolve(userInfor);
