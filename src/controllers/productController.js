@@ -84,7 +84,7 @@ let getAllProduct = async( req, res) => {
     if(req.params.page){
         let result = await product.getAllProduct(req.params.page); 
         if(result){
-            res.status(200).send({result: result, message: null});
+            res.status(200).send(result);
         }else{
             res.status(200).send({result: true, message: transError.error_data});
         }
