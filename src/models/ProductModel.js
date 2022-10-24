@@ -36,6 +36,15 @@ ProductSchema.statics = {
 
     getCountProduct(){
         return this.count(); 
+    }, 
+
+    updateProduct(idUser, idProduct, item){
+        return this.update({
+            $and: [
+                {idSeller: idUser},
+                {_id: idProduct}
+            ]
+        }, item).exec();
     }
 };
 

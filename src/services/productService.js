@@ -1,5 +1,6 @@
 import ProductModel from "../models/ProductModel"; 
 import {app} from "../config/app";
+import fs from "fs-extra" ; 
 
 let product_limit = app.limit_product ; 
 
@@ -70,6 +71,49 @@ let getAllProduct = (page) => {
         }
         
     }); 
+}; 
+
+let updateProduct = (idProduct, item) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let data_update = {
+                nameProduct: item.nameProduct,
+                idCategory: item.idCategory ,
+                price: item.price,
+                quantity: item.quantity,
+                description: item.description,
+                updateAt:  Date.now(),
+            }
+            let result = await ProductModel.updateProduct(item.idUser, idProduct, data_update) ;
+            if(result.matchedCount == 1)
+                resolve(true);
+            else
+                resolve(false);
+        } catch (error) {
+            reject(error)
+        }
+    })
+}; 
+
+let updateImage = (idUser, idProduct, nameImage) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let data_update = {
+                imageProduct: nameImage
+            }
+            let inforProduct = await ProductModel.findProductById(idProduct);
+            
+            await fs.remove(`${app.image_product_directory}/${inforProduct.imageProduct}`); 
+            
+            let result = await ProductModel.updateProduct(idUser,idProduct, data_update) ;
+            if(result.matchedCount ==1)
+                resolve(true);
+            else
+                reject(false);
+        } catch (error) {
+            reject(error)
+        }
+    })
 }
 
-export default {addNewProduct, getProductById, getAllProduct}; 
+export default {addNewProduct, getProductById, getAllProduct, updateProduct, updateImage}; 
