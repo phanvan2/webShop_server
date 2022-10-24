@@ -84,9 +84,9 @@ let getAllProduct = async( req, res) => {
     if(req.params.page){
         let result = await product.getAllProduct(req.params.page); 
         if(result){
-            res.status(200).send(result);
+            res.status(200).send({result: result, message: null});
         }else{
-            res.status(500).send(transError.error_data);
+            res.status(200).send({result: true, message: transError.error_data});
         }
     }
 } ; 
@@ -106,6 +106,7 @@ let updateProduct = async(req, res) => {
 }; 
 
 let updateImage = async(req, res) => {
+    
     ImgProductUploadFile(req, res, async(error)=> {
         if(error){
             res.status(500).send("lỗi");
@@ -122,5 +123,18 @@ let updateImage = async(req, res) => {
     })
 };
 
+let countProduct = async(req, res) => {
+    let result = await product.getQuantityAllProduct(); 
+    if(result){
+        res.status(200).send({result: result, message: null});
+    }
+}; 
 
-export default {createNewProduct, getProductById, getAllProduct, updateProduct, updateImage}; 
+export default {
+    createNewProduct, 
+    getProductById, 
+    getAllProduct, 
+    updateProduct, 
+    updateImage, 
+    countProduct
+}; 

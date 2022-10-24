@@ -74,6 +74,9 @@ let loginUser = async(req, res) => {
 }; 
 
 let updateImgUser = async(req, res)  => {
+    console.log(req);
+    console.log(req.body);
+    console.log(req.file);
     ImgAvatarUploadFile(req, res, async(error)=> {
         if(error){
             res.status(500).send("lỗi");
@@ -82,9 +85,9 @@ let updateImgUser = async(req, res)  => {
             let namImage = req.file.filename; 
             let result = await user.updateImageUser(idUser, namImage);
             if(result)
-                res.status(200).send(transSuccess.uploadImg);
+                res.status(200).send({result: true, message: transSuccess.uploadImg});
             else
-                res.status(500).send(transError.upImage);
+                res.status(200).send({result: true, message:transError.upImage});
         }
     })
 }

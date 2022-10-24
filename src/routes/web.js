@@ -24,7 +24,8 @@ let initRouter = (app) => {
     router.get("/all-product/:page", product.getAllProduct) ; 
     router.post("/updae-image-product/:idproduct",product.updateImage );
     router.post("/update-product/:idproduct", product.updateProduct);
-
+    router.get("/count-all-product", product.countProduct); 
+    
     router.get('/images/:path/:name_image', getFileImage); 
 
     router.post("/add-new-category", category.createNewCategory); 

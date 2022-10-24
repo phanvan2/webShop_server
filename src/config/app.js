@@ -4,5 +4,5 @@ export const app = {
     image_user_directory: "src/public/images/users",
 
     image_type: ['image/png', "image/jpg", "image/jpeg"],
-    limit_product: 5,
+    limit_product: 6,
 }; 

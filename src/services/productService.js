@@ -42,12 +42,12 @@ let getAllProduct = (page) => {
                 let result = await ProductModel.findAllProduct(1, count_product);
                 resolve(result);
 
-            }else{
+            }else if(!isNaN(page)){
                 let current_page = page; 
                 if(count_product){
-                        let total_page = Math.floor((count_product / product_limit)); 
+                        let total_page = Math.ceil((count_product / product_limit)); 
                         if (current_page > total_page){
-                            current_page = total_page;
+                            resolve(false); 
                         }
                         else if (current_page < 1){
                             current_page = 1;
@@ -58,12 +58,14 @@ let getAllProduct = (page) => {
                         if(result){
                             resolve(result);
                         }else{
-                            reject(false); 
+                            resolve(false); 
                         }
                 
                 }else{
                     reject(false);
                 }
+            }else{
+                resolve(false); 
             }
            
         } catch (error) {
@@ -115,5 +117,21 @@ let updateImage = (idUser, idProduct, nameImage) => {
         }
     })
 }
-
-export default {addNewProduct, getProductById, getAllProduct, updateProduct, updateImage}; 
+let getQuantityAllProduct = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let count_product = await ProductModel.getCountProduct();
+            let total_page = Math.ceil((count_product / product_limit)); 
+            let result = {
+                quantity : count_product ,
+                total_page: total_page
+            }; 
+            resolve(result) ; 
+    
+        } catch (error) {
+            reject(false);
+        }
+        
+    }); 
+}
+export default {addNewProduct, getProductById, getAllProduct, updateProduct, updateImage,getQuantityAllProduct }; 
