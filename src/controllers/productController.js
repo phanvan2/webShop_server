@@ -1,4 +1,5 @@
 import multer from "multer"; 
+import _ from "lodash" ; 
 
 import {product} from "../services/index"
 import { transError, transSuccess } from "../../lang/vi";
@@ -90,8 +91,36 @@ let getAllProduct = async( req, res) => {
     }
 } ; 
 
-let getFileImage = function(req, res) {
-    res.download('src/public/images/products/' + req.params.path);
-}
+let updateProduct = async(req, res) => {
+    if(_.isEmpty(req.body)){
+        res.status(500).send(transValidation.data_empty);
+    }else{
 
-export default {createNewProduct, getProductById, getAllProduct, getFileImage}; 
+        let result = await product.updateProduct(req.params.idproduct, req.body);
+        if(result){
+            res.status(200).send({result: true, message: transSuccess.updateProduct});
+        }else{
+            res.status(200).send({result: false, message: transError.updateProduct}); 
+        }
+    }
+}; 
+
+let updateImage = async(req, res) => {
+    ImgProductUploadFile(req, res, async(error)=> {
+        if(error){
+            res.status(500).send("lỗi");
+        }else{
+            let idUser = req.body.idUser; 
+            let namImage = req.file.filename; 
+            let idProduct = req.params.idproduct;
+            let result = await product.updateImage(idUser,idProduct, namImage);
+            if(result)
+                res.status(200).send(transSuccess.uploadImg);
+            else
+                res.status(200).send(transError.upImage);
+        }
+    })
+};
+
+
+export default {createNewProduct, getProductById, getAllProduct, updateProduct, updateImage}; 
