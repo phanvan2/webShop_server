@@ -130,11 +130,21 @@ let countProduct = async(req, res) => {
     }
 }; 
 
+let searchProduct = async(req, res) => {
+    console.log(req.query);
+    if(req.query.search){
+        let result = await product.searchProduct(req.query.search); 
+        res.status(200).send(result) ; 
+    }
+    res.status(200).send("xinhafo");
+}
+
 export default {
     createNewProduct, 
     getProductById, 
     getAllProduct, 
     updateProduct, 
     updateImage, 
-    countProduct
+    countProduct, 
+    searchProduct
 }; 

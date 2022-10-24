@@ -133,5 +133,25 @@ let getQuantityAllProduct = () => {
         }
         
     }); 
-}
-export default {addNewProduct, getProductById, getAllProduct, updateProduct, updateImage,getQuantityAllProduct }; 
+}; 
+
+let searchProduct = (search) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let result = await ProductModel.searchProduct(search) ; 
+            resolve(result) ; 
+    
+        } catch (error) {
+            reject(false);
+        }
+        
+    }); }
+export default {
+    addNewProduct, 
+    getProductById, 
+    getAllProduct, 
+    updateProduct, 
+    updateImage,
+    getQuantityAllProduct, 
+    searchProduct 
+}; 

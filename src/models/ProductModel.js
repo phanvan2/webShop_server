@@ -45,6 +45,9 @@ ProductSchema.statics = {
                 {_id: idProduct}
             ]
         }, item).exec();
+    },
+    searchProduct(search){
+        return this.find({nameProduct: {"$regex": new RegExp(search, "i")}},'_id nameProduct idSeller idCategory imageProduct price updateAt' ).exec();
     }
 };
 
