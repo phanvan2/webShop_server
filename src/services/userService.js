@@ -65,6 +65,33 @@ let loginUser = (item) => {
     })
 }; 
 
+let getNormalUser = (idUser) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let userItem = await userModel.findUserById(idUser); 
+            if(userItem){
+                let userInfor = {
+                    idUser : userItem._id,
+                    username: userItem.username,
+                    email: userItem.local.email,
+                    address: userItem.address,
+                    avatar: userItem.avatar,
+                    role: userItem.role,
+                    createAt: userItem.createAt,
+                    gender: userItem.gender
+                    
+                }
+                resolve(userInfor) ; 
+              
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(false); 
+
+        }
+    })}; 
+
 let updateImageUser = (idUser, nameImg) => {
     return new Promise(async(resolve, reject) => {
         try {
@@ -123,4 +150,4 @@ let checkPassUser = (idUser, password) => {
     
 }
 
-export default {createNew, loginUser, updateUser, checkPassUser, updateImageUser} ; 
+export default {createNew, loginUser, updateUser, checkPassUser, updateImageUser, getNormalUser} ; 

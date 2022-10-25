@@ -56,12 +56,11 @@ let loginUser = async(req, res) => {
     }else {
         try {
             let result = await user.loginUser(req.body); 
-            console.log(result);
             if(result){
                 res.status(200).send(result); 
     
             }else{
-                res.status(500).send(transError.login_user); 
+                res.status(500).send( transError.login_user); 
     
             }
         } catch (error) {
@@ -72,6 +71,20 @@ let loginUser = async(req, res) => {
         
     }
 }; 
+
+let getNormalUser = async(req, res) => {
+    if(_.isEmpty(req.params)) {
+        res.send("lỗi");
+    }else{  
+        console.log(req.params.idUser);
+        let result = await user.getNormalUser(req.params.idUser) ; 
+        if(result){
+            res.status(200).send({result: result, message: null}); 
+        }else{
+            res.send({result: false, message: "không tìm thấy dữ liệu"});
+        }
+    }
+}
 
 let updateImgUser = async(req, res)  => {
     console.log(req);
@@ -119,4 +132,4 @@ let checkPassUser = async(req, res) => {
         }
     }
 }
-export default  {regissterUser, loginUser, updateUser, checkPassUser, updateImgUser} ; 
+export default  {regissterUser, loginUser, updateUser, checkPassUser, updateImgUser, getNormalUser} ; 
