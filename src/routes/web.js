@@ -1,5 +1,5 @@
 import express from "express"; 
-import { user, product, category} from "../controllers/index" ; 
+import { user, product, category, feedback} from "../controllers/index" ; 
 import getFileImage from "../helpers/getFile";
 
 let router = express.Router(); 
@@ -18,6 +18,7 @@ let initRouter = (app) => {
     router.post("/update-user/:idUser", user.updateUser);
     router.post("/update-image-user/:idUser", user.updateImgUser);
     router.post("/check-pass-user/:idUser", user.checkPassUser);
+    router.get("/get-normal-user/:idUser", user.getNormalUser) ; 
     
     router.post("/add-new-product/", product.createNewProduct);
     router.get("/detail-product", product.getProductById);
@@ -30,6 +31,8 @@ let initRouter = (app) => {
 
     router.post("/add-new-category", category.createNewCategory); 
     router.get("/category", category.getNormalCategoies); 
+
+    router.post("/feedback-user", feedback.createNew); 
 
 
     return app.use("/", router);
