@@ -1,4 +1,5 @@
 import ProductModel from "../models/ProductModel"; 
+import userModel from "../models/userModel";
 import {app} from "../config/app";
 import fs from "fs-extra" ; 
 
@@ -22,8 +23,32 @@ let getProductById = (idProduct) => {
     return new Promise(async(resolve, reject) => {
         try {
             let result = await ProductModel.findProductById(idProduct) ; 
-            if(result)
-            resolve(result); 
+            if(result){
+                let userInfor = await userModel.findUserById(result.idSeller) ; 
+                console.log(userInfor)
+                let data = {
+                    _id : result._id,
+                    nameProduct: result.nameProduct,
+                    idSeller: {
+                        email: userInfor.local.email,
+                        _id: userInfor._id,
+                        username: userInfor.username,
+                        gender: userInfor.gender,
+                        phone: userInfor.phone,
+                        address: userInfor.address,
+                        avatar: userInfor.avatar,
+                        role: userInfor.role
+                    },
+                    idCategory: result.idCategory,
+                    imageProduct: result.imageProduct,
+                    price: result.price,
+                    quantity: result.quantity,
+                    description: result.description
+                }
+                
+                resolve(data); 
+
+            }
             else 
             resolve(false)
         } catch (error) {

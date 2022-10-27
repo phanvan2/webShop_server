@@ -2,7 +2,7 @@ import multer from "multer";
 import _ from "lodash" ; 
 
 import {product} from "../services/index"
-import { transError, transSuccess } from "../../lang/vi";
+import { transError, transSuccess, transValidation } from "../../lang/vi";
 import {app} from "../config/app"; 
 
 let storageImageProduct = multer.diskStorage({
@@ -135,8 +135,10 @@ let searchProduct = async(req, res) => {
     if(req.query.search){
         let result = await product.searchProduct(req.query.search); 
         res.status(200).send(result) ; 
+    }else{
+        res.send(transValidation.search_empty);
+
     }
-    res.status(200).send("xinhafo");
 }
 
 export default {

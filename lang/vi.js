@@ -1,7 +1,7 @@
 export const transValidation = {
     data_empty: "Vui lòng nhập lại thông tin của bạn",
-    category_exists: "Phân loại sản phẩm này đã tồn tại" 
-
+    category_exists: "Phân loại sản phẩm này đã tồn tại", 
+    search_empty: "Chúng tôi không biết bạn tìm kiếm gì"
     
 };
 
