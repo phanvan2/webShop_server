@@ -5,4 +5,5 @@ export const app = {
 
     image_type: ['image/png', "image/jpg", "image/jpeg"],
     limit_product: 6,
+    limit_feedback: 5
 }; 

@@ -33,7 +33,7 @@ let initRouter = (app) => {
     router.get("/category", category.getNormalCategoies); 
 
     router.post("/feedback-user", feedback.createNew); 
-
+    router.get("/get-feedback/:idProduct/:page", feedback.getFeedback);
 
     return app.use("/", router);
 }
