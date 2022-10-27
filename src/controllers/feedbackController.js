@@ -2,7 +2,6 @@ import _ from "lodash";
 import {feedback} from "../services/index" ; 
 
 let createNew = async(req , res) => {
-    console.log("controller") ;
     if(_.isEmpty(req.body)){
         res.send("ko tìm thấy dữ liêu được gửi đến");
     }else{
@@ -14,7 +13,19 @@ let createNew = async(req , res) => {
     }
 };
 
+let getFeedback = async(req, res) => {
+    if(req.params.page && req.params.idProduct){
+        let result = await feedback.getfeedback(req.params.page, req.params.idProduct); 
+        if(result){
+            res.status(200).send(result);
+        }else{
+            res.status(200).send({result: true, message: transError.error_data});
+        }
+    }
+}
+
 export default {
-    createNew
+    createNew,
+    getFeedback
 }
 
