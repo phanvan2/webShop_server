@@ -34,7 +34,29 @@ let getfeedback = async(page, idProduct) => {
             console.log(count_feedback)
             if(page == "all"){
                 let result = await feedbackModel.getFeedBack(1,idProduct, count_feedback);
-                resolve(result);
+                let newResult = result.map(async(item) => {
+                    let userInfor = await userModel.findUserById(item.idUser);                            
+                    item = {
+                        "_id": item._id,
+                        "user": {
+                            _idUser: userInfor._id,
+                            email: userInfor.local.email,
+                            username: userInfor.username,
+                            avatar: userInfor.avatar
+                        }, 
+                        "idProduct": item.idProduct,
+                        "rate": item.rate,
+                        "comment": item.comment,
+                        "createAt": item.createAt,
+                        "updateAt": item.updateAt,
+                        "deleteAt": item.deleteAt
+
+                    }; 
+
+                    return item; 
+                }); 
+                let result1 = await Promise.all(newResult);
+                resolve(result1);
 
             }else if(!isNaN(page)){
                 let current_page = page; 
