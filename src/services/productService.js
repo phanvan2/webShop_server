@@ -90,7 +90,7 @@ let getAllProduct = (page, key_search) => {
                         if(result){
                             resolve(result);
                         }else{
-                            resolve(false); 
+                            resolve([]); 
                         }
                 
                 }else{
