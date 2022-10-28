@@ -69,7 +69,7 @@ let getProductById = async(req, res) => {
             if(result){
                 res.status(200).send(result); 
             }else{  
-                res.status(500).send(transError.product_detail)
+                res.send(transError.product_detail)
             }
         } catch (error) {
             res.status(500).send(transError.product_detail)
@@ -81,12 +81,17 @@ let getProductById = async(req, res) => {
 }
 
 let getAllProduct = async( req, res) => {
+      
     if(req.params.page){
-        let result = await product.getAllProduct(req.params.page); 
+        let key_search = "" ; 
+        if(req.query.search)
+            key_search = req.query.search ; 
+        
+        let result = await product.getAllProduct(req.params.page, key_search); 
         if(result){
             res.status(200).send(result);
         }else{
-            res.status(200).send({result: true, message: transError.error_data});
+            res.send({result: false, message: transError.error_data});
         }
     }
 } ; 
@@ -130,16 +135,16 @@ let countProduct = async(req, res) => {
     }
 }; 
 
-let searchProduct = async(req, res) => {
-    console.log(req.query);
-    if(req.query.search){
-        let result = await product.searchProduct(req.query.search); 
-        res.status(200).send(result) ; 
-    }else{
-        res.send(transValidation.search_empty);
+// let searchProduct = async(req, res) => {
+//     console.log(req.query);
+//     if(req.query.search){
+//         let result = await product.searchProduct(req.query.search); 
+//         res.status(200).send(result) ; 
+//     }else{
+//         res.send(transValidation.search_empty);
 
-    }
-}
+//     }
+// }
 
 export default {
     createNewProduct, 
@@ -148,5 +153,5 @@ export default {
     updateProduct, 
     updateImage, 
     countProduct, 
-    searchProduct
+    // searchProduct
 }; 
