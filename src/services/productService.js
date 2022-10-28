@@ -2,6 +2,7 @@ import ProductModel from "../models/ProductModel";
 import userModel from "../models/userModel";
 import {app} from "../config/app";
 import fs from "fs-extra" ; 
+import { transError, transSuccess } from "../../lang/vi";
 
 let product_limit = app.limit_product ; 
 
@@ -59,12 +60,17 @@ let getProductById = (idProduct) => {
     })
 }
 
-let getAllProduct = (page) => {
+let getAllProduct = (page, key_search) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let count_product = await ProductModel.getCountProduct();
-            if(page == "all"){
-                let result = await ProductModel.findAllProduct(1, count_product);
+            let count_product = await ProductModel.getCountProduct(key_search);
+            console.log(count_product)  ; 
+            if(count_product == 0){
+                resolve(transSuccess.not_search_result) ; 
+            }else if(page == "all"){
+                let result = await ProductModel.findAllProduct(1, count_product, key_search);
+                console.log(result) ;
+
                 resolve(result);
 
             }else if(!isNaN(page)){
@@ -72,14 +78,15 @@ let getAllProduct = (page) => {
                 if(count_product){
                         let total_page = Math.ceil((count_product / product_limit)); 
                         if (current_page > total_page){
-                            resolve(false); 
+                            resolve({result: false , message: transError.not_page}); 
                         }
                         else if (current_page < 1){
                             current_page = 1;
                         }
                          
                         let skipNumber = (current_page -1) * product_limit;
-                        let result = await ProductModel.findAllProduct(skipNumber, product_limit);
+                        let result = await ProductModel.findAllProduct(skipNumber, product_limit, key_search);
+                        console.log(result) ;
                         if(result){
                             resolve(result);
                         }else{
@@ -160,17 +167,17 @@ let getQuantityAllProduct = () => {
     }); 
 }; 
 
-let searchProduct = (search) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let result = await ProductModel.searchProduct(search) ; 
-            resolve(result) ; 
+// let searchProduct = (search) => {
+//     return new Promise(async (resolve, reject) => {
+//         try {
+//             let result = await ProductModel.searchProduct(search) ; 
+//             resolve(result) ; 
     
-        } catch (error) {
-            reject(false);
-        }
+//         } catch (error) {
+//             reject(false);
+//         }
         
-    }); }
+//     }); }
 export default {
     addNewProduct, 
     getProductById, 
@@ -178,5 +185,5 @@ export default {
     updateProduct, 
     updateImage,
     getQuantityAllProduct, 
-    searchProduct 
+    // searchProduct 
 }; 

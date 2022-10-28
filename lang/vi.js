@@ -16,8 +16,8 @@ export const transSuccess = {
     addNewProduct: "Thêm sản phẩm thành công",
     updateUser: "Cập nhật thông tin người dùng thành công",
     uploadImg: "Đã tải ảnh lên thành công",
-    updateProduct: "Cập nhật sản phẩm thành công"
-    
+    updateProduct: "Cập nhật sản phẩm thành công",
+    not_search_result: "không tìm thấy kết quả cần tìm kiếm"
 
 }; 
 
@@ -32,9 +32,10 @@ export const transError = {
     },
     addNewProduct: "Thêm sản phẩm thất bại, Vui lòng thử lại sau.",
     product_detail: "Rất tiếc chúng tôi không tìm thấy sản phẩm này.",
-    error_data: "Rất tiếc, đã xảy ra lỗi. Vui lòng kiểm tra lại đầu vào.",
+    error_data: "Rất tiếc, đã xảy ra lỗi. Vui lòng kiểm tra.",
     updateUser: "Cập nhật thông tin người dùng thất bại",
     uploadImg: "Lỗi khi tải ảnh lên",
     updateProduct: "Cập nhật sản phẩm thất bại",
+    not_page: "Rất tiếc, trang này không tồn tại!"
 
 }
