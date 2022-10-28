@@ -1,5 +1,6 @@
 import feedbackModel from "../models/FeedbackModel" ; 
 import {app} from "../config/app";
+import userModel from "../models/userModel";
 
 const limit_feedback = app.limit_feedback; 
 let createNew = (item) => {
@@ -48,11 +49,31 @@ let getfeedback = async(page, idProduct) => {
                          
                         let skipNumber = (current_page -1) * limit_feedback;
                         let result = await feedbackModel.getFeedBack(skipNumber,idProduct, limit_feedback);
-                        if(result){
-                            resolve(result);
-                        }else{
-                            resolve(false); 
-                        }
+                        let newResult = result.map(async(item) => {
+                            let userInfor = await userModel.findUserById(item.idUser);                            
+                            item = {
+                                "_id": item._id,
+                                "user": {
+                                    _idUser: userInfor._id,
+                                    email: userInfor.local.email,
+                                    username: userInfor.username,
+                                    avatar: userInfor.avatar
+                                }, 
+                                "idProduct": item.idProduct,
+                                "rate": item.rate,
+                                "comment": item.comment,
+                                "createAt": item.createAt,
+                                "updateAt": item.updateAt,
+                                "deleteAt": item.deleteAt
+
+                            }; 
+
+                            return item; 
+                        }); 
+                        let result1 = await Promise.all(newResult);
+                        // setTimeout(() => { console.log(newResult); }, 5000);
+
+                        resolve(result1) ; 
                 
                 }else{
                     resolve(false);

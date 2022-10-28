@@ -87,9 +87,9 @@ let getNormalUser = async(req, res) => {
 }
 
 let updateImgUser = async(req, res)  => {
-    console.log(req);
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req);
+    // console.log(req.body);
+    // console.log(req.file);
     ImgAvatarUploadFile(req, res, async(error)=> {
         if(error){
             res.status(500).send("lỗi");
