@@ -91,7 +91,7 @@ let getAllProduct = async( req, res) => {
         if(result){
             res.status(200).send(result);
         }else{
-            res.send({result: [], message: transError.error_data});
+            res.send({result: false, message: transError.error_data});
         }
     }
 } ; 

@@ -65,8 +65,9 @@ let getAllProduct = (page, key_search) => {
         try {
             let count_product = await ProductModel.getCountProduct(key_search);
             console.log(count_product)  ; 
-            if(count_product == 0){
-                resolve(transSuccess.not_search_result) ; 
+            if(count_product == 0){ // nếu ko tìm tháy sản phẩmphẩm
+                resolve([]) ;  // muốn tra về như thế này ko a 
+
             }else if(page == "all"){
                 let result = await ProductModel.findAllProduct(1, count_product, key_search);
                 console.log(result) ;
@@ -78,7 +79,7 @@ let getAllProduct = (page, key_search) => {
                 if(count_product){
                         let total_page = Math.ceil((count_product / product_limit)); 
                         if (current_page > total_page){
-                            resolve({result: false , message: transError.not_page}); 
+                            resolve({result: [] , message: transError.not_page}); // nếu page hiện tại vượt quá tổng page
                         }
                         else if (current_page < 1){
                             current_page = 1;
