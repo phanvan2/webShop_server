@@ -34,6 +34,7 @@ let getfeedback = async(page, idProduct) => {
             console.log(count_feedback)
             if(page == "all"){
                 let result = await feedbackModel.getFeedBack(1,idProduct, count_feedback);
+                
                 resolve(result);
 
             }else if(!isNaN(page)){
