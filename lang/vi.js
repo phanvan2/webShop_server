@@ -1,5 +1,5 @@
 export const transValidation = {
-    data_empty: "Vui lòng nhập lại thông tin của bạn",
+    data_empty: "Không nhận được dữ liều đầu vào. Vui lòng thử lại sau!",
     category_exists: "Phân loại sản phẩm này đã tồn tại", 
     search_empty: "Chúng tôi không biết bạn tìm kiếm gì"
     
@@ -17,7 +17,10 @@ export const transSuccess = {
     updateUser: "Cập nhật thông tin người dùng thành công",
     uploadImg: "Đã tải ảnh lên thành công",
     updateProduct: "Cập nhật sản phẩm thành công",
-    not_search_result: "không tìm thấy kết quả cần tìm kiếm"
+    not_search_result: "không tìm thấy kết quả cần tìm kiếm",
+    createNewShop: (nameShop) => {
+        return `Cửa hàng ${nameShop} của bạn đã được tạo thành công`;
+    }
 
 }; 
 
@@ -36,6 +39,7 @@ export const transError = {
     updateUser: "Cập nhật thông tin người dùng thất bại",
     uploadImg: "Lỗi khi tải ảnh lên",
     updateProduct: "Cập nhật sản phẩm thất bại",
-    not_page: "Rất tiếc, trang này không tồn tại!"
-
+    not_page: "Rất tiếc, trang này không tồn tại!",
+    createNewShop: "Tạo của hàng thất bại. Vui lòng thử lại sau :)",
+    existShop: "Xin lỗi, Mỗi người dùng chỉ có thể tạo một cửa hàng duy nhất."
 }

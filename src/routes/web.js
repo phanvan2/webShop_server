@@ -1,5 +1,5 @@
 import express from "express"; 
-import { user, product, category, feedback} from "../controllers/index" ; 
+import { user, product, category, feedback, shop} from "../controllers/index" ; 
 import getFileImage from "../helpers/getFile";
 
 let router = express.Router(); 
@@ -35,6 +35,8 @@ let initRouter = (app) => {
     router.post("/feedback-user", feedback.createNew); 
     router.get("/get-feedback/:idProduct/:page", feedback.getFeedback);
 
+    router.post("/shop/create-new", shop.createNew);
+    
     return app.use("/", router);
 }
 export default initRouter; 

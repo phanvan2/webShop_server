@@ -1,4 +1,4 @@
-import mongoose, { model } from "mongoose";
+import mongoose from "mongoose";
 
 let Schema = mongoose.Schema; 
 
@@ -6,6 +6,9 @@ let ShopSchema = new Schema({
     nameShop: {type:String, default: null},
     idUser: {type: String, default: null},
     imgShop: {type:String, default: "default-shop.png"},
+    quantityProduct: {type:Number, default: 0},
+    followers: {type:Number, default: 0} ,
+    address: {type: String, default:null},
     createAt: {type: String, default: Date.now}, 
     updateAt: {type: String, default: null}, 
     deleteAt: {type:String, default: null},
@@ -14,6 +17,10 @@ let ShopSchema = new Schema({
 ShopSchema.statics = {
     createNew(item) {
         return this.create(item) ;
+    },
+
+    countByIdUser(idUser){
+        return this.count({"idUser": idUser}).exec();
     }
 } ; 
 
