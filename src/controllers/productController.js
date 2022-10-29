@@ -16,7 +16,7 @@ let storageImageProduct = multer.diskStorage({
                 return cb("lỗi chọn file", null ,  )
             }
             let imageName =  `${Date.now()}-${file.originalname}`; 
-            cb(null, imageName) ; 
+            return cb(null, imageName) ; 
         }catch(error){
             return cb("lỗi chọn file", null ,  )
 
@@ -98,14 +98,13 @@ let getAllProduct = async( req, res) => {
 
 let updateProduct = async(req, res) => {
     if(_.isEmpty(req.body)){
-        res.status(500).send(transValidation.data_empty);
+        res.send(transValidation.data_empty);
     }else{
-
         let result = await product.updateProduct(req.params.idproduct, req.body);
         if(result){
             res.status(200).send({result: true, message: transSuccess.updateProduct});
         }else{
-            res.status(200).send({result: false, message: transError.updateProduct}); 
+            res.send({result: false, message: transError.updateProduct}); 
         }
     }
 }; 
@@ -116,14 +115,15 @@ let updateImage = async(req, res) => {
         if(error){
             res.status(500).send("lỗi");
         }else{
+            console.log(req.body); 
             let idUser = req.body.idUser; 
-            let namImage = req.file.filename; 
+            let nameImage = req.file.filename; 
             let idProduct = req.params.idproduct;
-            let result = await product.updateImage(idUser,idProduct, namImage);
+            let result = await product.updateImage(idUser,idProduct, nameImage);
             if(result)
                 res.status(200).send(transSuccess.uploadImg);
             else
-                res.status(200).send(transError.upImage);
+                res.send(transError.upImage);
         }
     })
 };
@@ -155,3 +155,4 @@ export default {
     countProduct, 
     // searchProduct
 }; 
+

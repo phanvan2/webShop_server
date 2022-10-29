@@ -106,9 +106,9 @@ let updateImgUser = async(req, res)  => {
 }
 
 let updateUser = async(req, res) => {
-
+    
     if(_.isEmpty(req.body)){
-        res.status(500).send(transValidation.data_empty);
+        res.send(transValidation.data_empty);
     }else{
 
         let result = await user.updateUser(req.params.idUser, req.body);

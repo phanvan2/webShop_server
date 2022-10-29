@@ -119,7 +119,9 @@ let updateProduct = (idProduct, item) => {
                 description: item.description,
                 updateAt:  Date.now(),
             }
+            console.log(data_update); 
             let result = await ProductModel.updateProduct(item.idUser, idProduct, data_update) ;
+            console.log(result);
             if(result.matchedCount == 1)
                 resolve(true);
             else
