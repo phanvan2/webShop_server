@@ -20,7 +20,8 @@ export const transSuccess = {
     not_search_result: "không tìm thấy kết quả cần tìm kiếm",
     createNewShop: (nameShop) => {
         return `Cửa hàng ${nameShop} của bạn đã được tạo thành công`;
-    }
+    },
+    getProductByIdCateogry: "Hiển thị kết quả danh mục thành cônng",
 
 }; 
 
@@ -41,5 +42,6 @@ export const transError = {
     updateProduct: "Cập nhật sản phẩm thất bại",
     not_page: "Rất tiếc, trang này không tồn tại!",
     createNewShop: "Tạo của hàng thất bại. Vui lòng thử lại sau :)",
-    existShop: "Xin lỗi, Mỗi người dùng chỉ có thể tạo một cửa hàng duy nhất."
+    existShop: "Xin lỗi, Mỗi người dùng chỉ có thể tạo một cửa hàng duy nhất.",
+    getProductByIdCateogry: "Xin lỗi, chúng tôi không tìm thấy kết quả cần tìm. Vui lòng thử lại sau"
 }
