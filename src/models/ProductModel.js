@@ -34,7 +34,7 @@ ProductSchema.statics = {
         return this.find({nameProduct: {"$regex": new RegExp(search, "i")}}).skip(skipNumber).limit(product_limit).exec();
     },
 
-    getCountProduct(search){
+    getCountProduct(search=""){
         return this.where({nameProduct: {"$regex": new RegExp(search, "i")}}).count(); 
     }, 
 
@@ -48,7 +48,10 @@ ProductSchema.statics = {
     },
     // searchProduct(search){
     //     return this.find({nameProduct: {"$regex": new RegExp(search, "i")}},'_id nameProduct idSeller idCategory imageProduct price updateAt' ).exec();
-    // }
+    // },
+    getProductByIdCategory(idCategory){
+        return this.find({idCategory: idCategory}).exec();
+    }
 };
 
 export default mongoose.model("product", ProductSchema) ; 

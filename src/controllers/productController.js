@@ -86,7 +86,8 @@ let getAllProduct = async( req, res) => {
         let key_search = "" ; 
         if(req.query.search)
             key_search = req.query.search ; 
-        
+        if(req.query.idcategory)
+            key_idCategory = req.query.idcategory ; 
         let result = await product.getAllProduct(req.params.page, key_search); 
         if(result){
             res.status(200).send(result);
@@ -146,6 +147,21 @@ let countProduct = async(req, res) => {
 //     }
 // }
 
+let getProductByIdCategory = async(req, res) => {
+    if(req.params.idCategory){
+        let idCategory = req.params.idCategory; 
+        let result = await product.getProductByIdCategory(idCategory);
+        if(!_.isEmpty(result)){
+            res.status(200).send({result: result, message: transSuccess.getProductByIdCateogry}); 
+
+        }else{
+            res.send({result: false, message: transError.getProductByIdCateogry})
+        }
+    }else{
+        res.send({result: false, message: transValidation.data_empty});
+    }
+}
+
 export default {
     createNewProduct, 
     getProductById, 
@@ -153,6 +169,7 @@ export default {
     updateProduct, 
     updateImage, 
     countProduct, 
-    // searchProduct
+    // searchProduct,
+    getProductByIdCategory
 }; 
 

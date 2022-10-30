@@ -95,7 +95,7 @@ let getAllProduct = (page, key_search) => {
                         }
                 
                 }else{
-                    reject(false);
+                    resolve(false);
                 }
             }else{
                 resolve(false); 
@@ -181,6 +181,19 @@ let getQuantityAllProduct = () => {
 //         }
         
 //     }); }
+
+let getProductByIdCategory = (idCategory) => {
+    return new Promise(async(resolve, reject)=> {
+        try {
+            let result = await ProductModel.getProductByIdCategory(idCategory); 
+            resolve(result) ; 
+        } catch (error) {
+            reject(false);
+        }
+
+    });
+}
+
 export default {
     addNewProduct, 
     getProductById, 
@@ -188,5 +201,6 @@ export default {
     updateProduct, 
     updateImage,
     getQuantityAllProduct, 
-    // searchProduct 
+    // searchProduct , 
+    getProductByIdCategory
 }; 
