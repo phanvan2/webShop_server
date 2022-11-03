@@ -26,7 +26,7 @@ let getProductById = (idProduct) => {
             let result = await ProductModel.findProductById(idProduct) ; 
             if(result){
                 let userInfor = await userModel.findUserById(result.idSeller) ; 
-                console.log(userInfor)
+                // console.log(userInfor)
                 let data = {
                     _id : result._id,
                     nameProduct: result.nameProduct,
@@ -64,13 +64,13 @@ let getAllProduct = (page, key_search) => {
     return new Promise(async (resolve, reject) => {
         try {
             let count_product = await ProductModel.getCountProduct(key_search);
-            console.log(count_product)  ; 
+            // console.log(count_product)  ; 
             if(count_product == 0){ // nếu ko tìm tháy sản phẩmphẩm
                 resolve([]) ;  // muốn tra về như thế này ko a 
 
             }else if(page == "all"){
                 let result = await ProductModel.findAllProduct(1, count_product, key_search);
-                console.log(result) ;
+                // console.log(result) ;
 
                 resolve(result);
 
@@ -87,7 +87,7 @@ let getAllProduct = (page, key_search) => {
                          
                         let skipNumber = (current_page -1) * product_limit;
                         let result = await ProductModel.findAllProduct(skipNumber, product_limit, key_search);
-                        console.log(result) ;
+                        // console.log(result) ;
                         if(result){
                             resolve(result);
                         }else{
@@ -119,9 +119,9 @@ let updateProduct = (idProduct, item) => {
                 description: item.description,
                 updateAt:  Date.now(),
             }
-            console.log(data_update); 
+            // console.log(data_update); 
             let result = await ProductModel.updateProduct(item.idUser, idProduct, data_update) ;
-            console.log(result);
+            // console.log(result);
             if(result.matchedCount == 1)
                 resolve(true);
             else
@@ -194,6 +194,72 @@ let getProductByIdCategory = (idCategory) => {
     });
 }
 
+// let checkProductSoldOut = (quantity, idProduct) => {
+//     return new Promise(async(resolve, reject)=> {
+//         try {
+
+//             let result = await ProductModel.getQuantityById(idProduct) ; 
+//             console.log(result.quantity); 
+//             console.log(quantity) ; 
+//             console.log(result.quantity >= quantity) ; 
+//             resolve(result.quantity >= quantity) ; 
+//             // if(quantityProduct >= quantity) {
+//             //     resolve(true);
+//             // }else{
+//             //     resolve(false);
+//             // }
+//         } catch (error) {
+//             reject(error); 
+//         }
+
+//     })
+// }
+
+// let checkListProductSoldOut = (cartItems) => {
+//     return new Promise(async(resolve, reject)=> {
+//         try {
+//             let result1 = cartItems.filter(async(item)=> {
+//                 let result = await ProductModel.getQuantityById(item.idProduct) ; 
+//                 console.log(result) ; 
+//                 console.log("hello") ;
+//                 return (Number(result.quantity) < Number(item.quantity)); 
+//             }) ; 
+//             let resultt = await Promise.all(result1) ; 
+//             return resolve(resultt) ; 
+//         } catch (error) {
+//             return reject(error) ; 
+//         }
+
+//     }); 
+// }
+
+
+/**
+ * update quantity when user order product 
+ * @param {*} quantity  quantity: the number of products that the user buys
+ * @param {*} idProduct 
+ * @returns 
+ * 
+ */
+let updateQuantity = (idProduct, quantity) => {
+    return new Promise(async(resolve, reject)=> {
+        try {
+            let quantiyProduct = await ProductModel.getQuantityById(idProduct); 
+            console.log("số lượng sản phẩm hiện tại"); 
+            console.log(quantiyProduct) ; 
+            let changed_quantity = Number(quantiyProduct) - Number(quantity) ; 
+            let result = await ProductModel.updateQuantity(idProduct, changed_quantity) ; 
+            console.log("Kết quả cập nhật sản phẩm số lượng sản phẩm");
+            console.log(result) ; 
+            if(result.matchedCount == 1)
+                resolve(true);
+            else
+                resolve(false);        
+            } catch (error) {
+        }
+
+    })}
+
 export default {
     addNewProduct, 
     getProductById, 
@@ -202,5 +268,8 @@ export default {
     updateImage,
     getQuantityAllProduct, 
     // searchProduct , 
-    getProductByIdCategory
+    getProductByIdCategory, 
+    // checkProductSoldOut,
+    // checkListProductSoldOut,
+    updateQuantity
 }; 

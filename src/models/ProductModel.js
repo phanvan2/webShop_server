@@ -51,7 +51,16 @@ ProductSchema.statics = {
     // },
     getProductByIdCategory(idCategory){
         return this.find({idCategory: idCategory}).exec();
+    },
+    
+    getQuantityById(idProduct){
+        return this.findOne({_id: idProduct},"quantity" ).exec() ; 
+    },
+
+    updateQuantity(idProduct, quantity){
+        return this.findOneAndUpdate({_id: idProduct},{quantity: quantity} ).exec() ;
     }
 };
+
 
 export default mongoose.model("product", ProductSchema) ; 
