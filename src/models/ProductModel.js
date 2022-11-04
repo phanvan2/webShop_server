@@ -57,8 +57,8 @@ ProductSchema.statics = {
         return this.findOne({_id: idProduct},"quantity" ).exec() ; 
     },
 
-    updateQuantity(idProduct, quantity){
-        return this.findOneAndUpdate({_id: idProduct},{quantity: quantity} ).exec() ;
+    updateQuantity(idProduct, dataUpdate){
+        return this.findOneAndUpdate({"_id": idProduct}, dataUpdate ).exec() ;
     }
 };
 

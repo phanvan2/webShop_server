@@ -245,12 +245,17 @@ let updateQuantity = (idProduct, quantity) => {
     return new Promise(async(resolve, reject)=> {
         try {
             let quantiyProduct = await ProductModel.getQuantityById(idProduct); 
-            console.log("số lượng sản phẩm hiện tại"); 
-            console.log(quantiyProduct) ; 
-            let changed_quantity = Number(quantiyProduct) - Number(quantity) ; 
-            let result = await ProductModel.updateQuantity(idProduct, changed_quantity) ; 
-            console.log("Kết quả cập nhật sản phẩm số lượng sản phẩm");
-            console.log(result) ; 
+            // console.log("số lượng sản phẩm hiện tại"); 
+
+            let changed_quantity = Number(quantiyProduct.quantity) - Number(quantity) ; 
+            let data_update = {
+                "quantity": changed_quantity, 
+                "updateAt":  Date.now(),
+
+            }; 
+            let result = await ProductModel.updateQuantity(idProduct, data_update) ; 
+            // console.log("Kết quả cập nhật sản phẩm số lượng sản phẩm");
+            // console.log(result) ; 
             if(result.matchedCount == 1)
                 resolve(true);
             else

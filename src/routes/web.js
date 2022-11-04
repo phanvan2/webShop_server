@@ -32,15 +32,20 @@ let initRouter = (app) => {
     
     router.get('/images/:path/:name_image', getFileImage);
 
+    // category
     router.post("/add-new-category", category.createNewCategory); 
     router.get("/category", category.getNormalCategoies); 
 
+    // feedback ( comment, rate star)
     router.post("/feedback-user", feedback.createNew); 
     router.get("/get-feedback/:idProduct/:page", feedback.getFeedback);
 
+    // Shop
     router.post("/shop/create-new", shop.createNew);
 
+    // Cart
     router.post("/cart/order",cart.orderCart  );
+    router.get("/cart/:idUser", cart.getCartByIdUser) ; 
     
     return app.use("/", router);
 }
