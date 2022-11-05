@@ -26,13 +26,13 @@ let getCartByIdUser = async(req, res) => {
     if(req.params.idUser) {
         let result = await order.getCartByIdUser(req.params.idUser) ; 
         if(result){
-            res.status(200).send({result:result, message:null}) ; 
+            res.status(200).send(result) ; 
 
         }else{
-            res.send({result:false, message:transError.error_data})
+            res.send([])
         }
     }else{
-        res.send({result:false, message: transValidation.data_empty}) ; 
+        res.send([]) ; 
 
     }
 }
