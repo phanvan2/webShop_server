@@ -48,4 +48,5 @@ export const transError = {
     orderCart: "Tạo đơn hàng thất bại. Vui lòng thử lại sau",
     outOfProduct: "Xin lỗi, một số sản phẩm đã hết:((",
 
+
 }
