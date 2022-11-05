@@ -34,9 +34,27 @@ let getCartByIdUser = (idUser) => {
     }) ; 
 }
 
+let getOrderById = (idOrder) => {
+    return new Promise( async(resolve, reject) => {
+        try {
+            let result = await OrderModel.getOrderById(idOrder) ;
+            if(result){
+                resolve(result) ; 
+
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(error);
+        }
+
+    }) ; 
+}
+
 export default {
     orderCart, 
-    getCartByIdUser
+    getCartByIdUser,
+    getOrderById
 }
 
 

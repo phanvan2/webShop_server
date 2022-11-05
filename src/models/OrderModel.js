@@ -30,6 +30,9 @@ CartSchema.statics = {
     },
     getCartByIdUser(idUser){
         return this.find({"idUser": idUser}).exec(); 
+    },
+    getOrderById(id){
+        return this.findById(id).exec(); 
     }
 }
 

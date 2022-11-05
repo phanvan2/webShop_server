@@ -37,9 +37,26 @@ let getCartByIdUser = async(req, res) => {
     }
 }
 
+let getOrderById = async(req, res) => {
+    if(req.params.idOrder) {
+        let result = await order.getOrderById(req.params.idOrder) ; 
+        if(result){
+            res.status(200).send(result) ; 
+
+        }else{
+            res.send([])
+        }
+    }else{
+        res.send([]) ; 
+
+    }
+}
+
+
 export default {
     orderCart, 
-    getCartByIdUser
+    getCartByIdUser,
+    getOrderById
 }
 
 
