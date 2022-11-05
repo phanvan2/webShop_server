@@ -194,45 +194,6 @@ let getProductByIdCategory = (idCategory) => {
     });
 }
 
-// let checkProductSoldOut = (quantity, idProduct) => {
-//     return new Promise(async(resolve, reject)=> {
-//         try {
-
-//             let result = await ProductModel.getQuantityById(idProduct) ; 
-//             console.log(result.quantity); 
-//             console.log(quantity) ; 
-//             console.log(result.quantity >= quantity) ; 
-//             resolve(result.quantity >= quantity) ; 
-//             // if(quantityProduct >= quantity) {
-//             //     resolve(true);
-//             // }else{
-//             //     resolve(false);
-//             // }
-//         } catch (error) {
-//             reject(error); 
-//         }
-
-//     })
-// }
-
-// let checkListProductSoldOut = (cartItems) => {
-//     return new Promise(async(resolve, reject)=> {
-//         try {
-//             let result1 = cartItems.filter(async(item)=> {
-//                 let result = await ProductModel.getQuantityById(item.idProduct) ; 
-//                 console.log(result) ; 
-//                 console.log("hello") ;
-//                 return (Number(result.quantity) < Number(item.quantity)); 
-//             }) ; 
-//             let resultt = await Promise.all(result1) ; 
-//             return resolve(resultt) ; 
-//         } catch (error) {
-//             return reject(error) ; 
-//         }
-
-//     }); 
-// }
-
 
 /**
  * update quantity when user order product 

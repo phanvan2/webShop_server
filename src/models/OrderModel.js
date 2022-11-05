@@ -4,6 +4,13 @@ let Schema = mongoose.Schema ;
 
 let CartSchema = new Schema({
     idUser: String,
+    productItems:[{
+        idProduct: String,
+        nameProduct: String,
+        imgProduct: String,
+        quantity: {type: Number, default: 1},
+        unit_price: Number,
+    }],
     namedReceiver: {type: String, default: null},   // tên người nhận hàng
     addressReceiver: {type: String, default: null}, // địa chỉ người nhận hàng 
     phoneReceiver: {type: Number, default: null},   // số điện thoại người nhận hàng
@@ -20,8 +27,11 @@ let CartSchema = new Schema({
 CartSchema.statics = {
     createNew(item) {
         return this.create(item);
+    },
+    getCartByIdUser(idUser){
+        return this.find({"idUser": idUser}).exec(); 
     }
 }
 
-export default mongoose.model("cart", CartSchema); 
+export default mongoose.model("order", CartSchema); 
 
