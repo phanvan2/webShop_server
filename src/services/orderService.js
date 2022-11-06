@@ -49,12 +49,30 @@ let getOrderById = (idOrder) => {
         }
 
     }) ; 
+} ; 
+
+let changeStatus = (idOrder, statusChange) => {
+    return new Promise( async(resolve, reject) => {
+        try {
+            let result = await OrderModel.updateStatus(idOrder, statusChange) ;
+            if(result.matchedCount > 0){
+                resolve(true) ; 
+
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(error);
+        }
+
+    }) ; 
 }
 
 export default {
     orderCart, 
     getCartByIdUser,
-    getOrderById
+    getOrderById, 
+    changeStatus
 }
 
 

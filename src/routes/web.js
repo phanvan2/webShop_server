@@ -47,6 +47,7 @@ let initRouter = (app) => {
     router.post("/order/create-new",order.orderCart  );
     router.get("/order/getall/:idUser", order.getCartByIdUser) ; 
     router.get("/order/get-id/:idOrder", order.getOrderById) ; 
+    router.post("/order/change-status-order", order.changeStatus); 
     
     return app.use("/", router);
 }

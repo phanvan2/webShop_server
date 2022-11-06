@@ -35,7 +35,7 @@ let getCartByIdUser = async(req, res) => {
         res.send([]) ; 
 
     }
-}
+} ; 
 
 let getOrderById = async(req, res) => {
     if(req.params.idOrder) {
@@ -50,13 +50,28 @@ let getOrderById = async(req, res) => {
         res.send([]) ; 
 
     }
-}
+}; 
 
+let changeStatus = async(req, res) => {
+    if(_.isEmpty(req.body)){
+        res.send(transValidation.data_empty) ; 
+    }else{
+        let idOrder = req.body.idOrder ; 
+        let status = String(req.body.statusOrder); 
+        let result = await order.changeStatus(idOrder, status) ;   
+        if(result){
+            res.status(200).send(transSuccess.changeStatus) ; 
+        }else{
+            res.send(transError.changeStatus) ; 
+        }
+    }
+}; 
 
 export default {
     orderCart, 
     getCartByIdUser,
-    getOrderById
+    getOrderById, 
+    changeStatus
 }
 
 

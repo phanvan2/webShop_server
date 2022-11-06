@@ -14,7 +14,7 @@ let CartSchema = new Schema({
     namedReceiver: {type: String, default: null},   // tên người nhận hàng
     addressReceiver: {type: String, default: null}, // địa chỉ người nhận hàng 
     phoneReceiver: {type: Number, default: null},   // số điện thoại người nhận hàng
-    status: {type: String, default: null},          // trạng thái đơn hàng 
+    status: {type: String, default: "Đang chờ xác nhận"},          // trạng thái đơn hàng 
     payment:{type:String, default: ""},             // phương thức thanhh toán
     totalPrice: {type: String, default: 0},
     message: {type: String, default: ""},
@@ -29,10 +29,13 @@ CartSchema.statics = {
         return this.create(item);
     },
     getCartByIdUser(idUser){
-        return this.find({"idUser": idUser}).exec(); 
+        return this.find({idUser: idUser}).exec(); 
     },
     getOrderById(id){
         return this.findById(id).exec(); 
+    },
+    updateStatus(idOrder, statusChange){
+        return this.update({_id: idOrder}, {status: statusChange}).exec() ; 
     }
 }
 
