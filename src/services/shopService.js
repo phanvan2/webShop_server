@@ -29,7 +29,25 @@ let checkShopUserExit = (idUser) => {
     })
 }
 
+let getShopById = (idShop) =>{
+    return new Promise(async(resolve, reject) => {
+        try{
+            console.log(idShop);
+            let result = await ShopModel.getShopById(idShop); 
+            console.log(result);
+            if(result){
+                resolve(result);
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(false);
+        }
+    })
+}
+
 export default {
     createNew,
-    checkShopUserExit
+    checkShopUserExit,
+    getShopById
 }

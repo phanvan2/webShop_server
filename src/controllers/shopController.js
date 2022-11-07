@@ -73,6 +73,23 @@ let createNew = async(req , res) => {
 
 }; 
 
+let getShopById = async(req, res) => {
+
+    if(req.params.idShop){
+        let idShop = req.params.idShop; 
+        let result = await shop.getShopById(idShop); 
+        if(result){
+            res.status(200).send(result);
+        }else{
+            res.send({result: false, message: transError.error_data}); 
+        }
+
+    }else{
+        res.send({result:false, message: transValidation.data_empty});
+    }
+}
+
 export default {
-    createNew
+    createNew,
+    getShopById
 }

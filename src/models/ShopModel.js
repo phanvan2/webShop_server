@@ -22,6 +22,9 @@ ShopSchema.statics = {
 
     countByIdUser(idUser){
         return this.count({"idUser": idUser}).exec();
+    },
+    getShopById(id){
+        return this.findById(id).exec();
     }
 } ; 
 
