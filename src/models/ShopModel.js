@@ -9,6 +9,7 @@ let ShopSchema = new Schema({
     quantityProduct: {type:Number, default: 0},
     followers: {type:Number, default: 0} ,
     address: {type: String, default:null},
+    phone: {type:String, default: null},
     createAt: {type: String, default: Date.now}, 
     updateAt: {type: String, default: null}, 
     deleteAt: {type:String, default: null},

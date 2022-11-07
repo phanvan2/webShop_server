@@ -32,43 +32,44 @@ let ImgProductUploadFile = multer({
 }).single("img_shop"); 
 
 
-let createNew = (req , res) => {
-    ImgProductUploadFile(req, res, async(error)=> {
-        if(error){
-            res.send("lỗi ko upload được ảnh");
-        }else{
-            
-            if(!_.isEmpty(req.body)){
+let createNew = async(req , res) => {
+    if(!_.isEmpty(req.body)){
 
-                let checkShop = await shop.checkShopUserExit(req.body.idUser);
-                console.log(checkShop)
-                if(!checkShop){
-                    let data = {
-                        nameShop: req.body.nameShop,
-                        idUser: req.body.idUser,
-                        imgShop: req.file.filename,
-                        address: req.body.address
-                    }
-                    console.log(data);
-                    let result = await shop.createNew(data);
-                    console.log("chuẩn bị trả về kết quả nè");
-                    console.log(result);
-                    if(result){
-                        res.status(200).send({result: result, message: transSuccess.createNewShop(data.nameShop)});
-                    }
-                    else{
-                        res.send({result: false, message: transError.createNewShop}); 
-
-                    }
-                }else{
-                    res.send({result:false, message: transError.existShop}); 
-                }
-
-            }else{
-                res.send({result:false, message: transValidation.data_empty});
+        let checkShop = await shop.checkShopUserExit(req.body.idUser);
+        console.log(checkShop)
+        if(!checkShop){
+            let data = {
+                nameShop: req.body.nameShop,
+                idUser: req.body.idUser,
+                phone: String(req.body.phone),
+                address: req.body.address
             }
+            console.log(data);
+            let result = await shop.createNew(data);
+            console.log("chuẩn bị trả về kết quả nè");
+            console.log(result);
+            if(result){
+                res.status(200).send({result: result, message: transSuccess.createNewShop(data.nameShop)});
+            }
+            else{
+                res.send({result: false, message: transError.createNewShop}); 
+
+            }
+        }else{
+            res.send({result:false, message: transError.existShop}); 
         }
-    })
+
+    }else{
+        res.send({result:false, message: transValidation.data_empty});
+    }
+    // ImgProductUploadFile(req, res, async(error)=> {
+    //     if(error){
+    //         res.send("lỗi ko upload được ảnh");
+    //     }else{
+            
+
+    //     }
+    // })
 
 }; 
 
