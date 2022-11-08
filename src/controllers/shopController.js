@@ -103,10 +103,41 @@ let getShopByIdUser = async(req, res) => {
     }else{
         res.send({result:[], message: transValidation.data_empty});
     }
+}; 
+
+let updateInfoShop = async(req, res) => {
+    if(!_.isEmpty(req.body)){
+        let data_update = {
+            nameShop: req.body.nameShop,
+            phone: req.body.phone,
+            address: req.body.address,
+            updateAt: Date.now()
+        };
+        
+        let filter = {
+            idUser: req.body.idUser,
+            _id: req.body.idShop
+        }
+
+        let result = await shop.updateInfoShop(filter, data_update); 
+        if(result){
+            res.status(200).send({result:true, message: transSuccess.update});
+        }else{
+            res.send({result:false, message: transError.update});
+        }
+    }else{
+        res.send({result:[], message: transValidation.data_empty});
+    }}
+
+let updateImageShop = async(req, res) => {
+    if(req.params.idShop){
+    }
 }
 
 export default {
     createNew,
     getShopById,
-    getShopByIdUser
+    getShopByIdUser,
+    updateInfoShop,
+    updateImageShop
 }

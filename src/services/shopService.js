@@ -61,10 +61,29 @@ let getShopByIdUser = (idUser) =>{
             reject(false);
         }
     })
+}; 
+
+let updateInfoShop = (fillter , data_update) => {
+    return new Promise(async(resolve, reject) => {
+        try{
+            console.log(data_update);
+            console.log(fillter);
+            let result = await ShopModel.updateInfoShop(fillter , data_update); 
+            // console.log(result);
+            if(result.matchedCount == 1){
+                resolve(result);
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(false);
+        }
+    })
 }
 export default {
     createNew,
     checkShopUserExit,
     getShopById,
-    getShopByIdUser
+    getShopByIdUser, 
+    updateInfoShop
 }

@@ -28,6 +28,9 @@ ShopSchema.statics = {
     },
     getShopByIdUser(idUser){
         return this.findOne({idUser: idUser}).exec(); 
+    },
+    updateInfoShop(fillter, data_update){
+        return this.update(fillter, data_update).exec();
     }
 } ; 
 

@@ -24,6 +24,7 @@ export const transSuccess = {
     getProductByIdCateogry: "Hiển thị kết quả danh mục thành cônng",
     orderCart: "Đơn hàng của bạn đã được tạo thành công",
     changeStatus: true,
+    update: "Bạn đã cập nhật thành công",
 
 }; 
 
@@ -49,6 +50,8 @@ export const transError = {
     orderCart: "Tạo đơn hàng thất bại. Vui lòng thử lại sau",
     outOfProduct: "Xin lỗi, một số sản phẩm đã hết:((",
     changeStatus: false, 
+    update: "Rất tiếc, cập nhật thất bại. Vui lòng thử lại sau"
+
 
 
 }
