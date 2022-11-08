@@ -46,8 +46,25 @@ let getShopById = (idShop) =>{
     })
 }
 
+let getShopByIdUser = (idUser) =>{
+    return new Promise(async(resolve, reject) => {
+        try{
+            // console.log(idUser);
+            let result = await ShopModel.getShopByIdUser(idUser); 
+            // console.log(result);
+            if(result){
+                resolve(result);
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(false);
+        }
+    })
+}
 export default {
     createNew,
     checkShopUserExit,
-    getShopById
+    getShopById,
+    getShopByIdUser
 }

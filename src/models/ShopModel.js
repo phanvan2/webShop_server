@@ -25,6 +25,9 @@ ShopSchema.statics = {
     },
     getShopById(id){
         return this.findById(id).exec();
+    },
+    getShopByIdUser(idUser){
+        return this.findOne({idUser: idUser}).exec(); 
     }
 } ; 
 

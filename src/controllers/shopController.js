@@ -81,15 +81,32 @@ let getShopById = async(req, res) => {
         if(result){
             res.status(200).send(result);
         }else{
-            res.send({result: false, message: transError.error_data}); 
+            res.send({result: [], message: transError.error_data}); 
         }
 
     }else{
-        res.send({result:false, message: transValidation.data_empty});
+        res.send({result:[], message: transValidation.data_empty});
+    }
+}
+
+let getShopByIdUser = async(req, res) => {
+
+    if(req.params.idUser){
+        let idUser = req.params.idUser; 
+        let result = await shop.getShopByIdUser(idUser); 
+        if(result){
+            res.status(200).send(result);
+        }else{
+            res.send({result: [], message: transError.error_data}); 
+        }
+
+    }else{
+        res.send({result:[], message: transValidation.data_empty});
     }
 }
 
 export default {
     createNew,
-    getShopById
+    getShopById,
+    getShopByIdUser
 }

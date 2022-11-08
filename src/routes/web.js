@@ -42,7 +42,8 @@ let initRouter = (app) => {
 
     // Shop
     router.post("/shop/create-new", shop.createNew);
-    router.get("/shop/get-shop/:idShop", shop.getShopById)
+    router.get("/shop/get-shop/:idShop", shop.getShopById); 
+    router.get("/shop/get-shop-by-user/:idUser", shop.getShopByIdUser);
 
     // Order
     router.post("/order/create-new",order.orderCart  );
