@@ -44,8 +44,7 @@ let initRouter = (app) => {
     router.post("/shop/create-new", shop.createNew);
     router.get("/shop/get-shop/:idShop", shop.getShopById); 
     router.get("/shop/get-shop-by-user/:idUser", shop.getShopByIdUser);
-    router.post("/shop/update-image-shop", shop.updateImageShop);
-    router.post("/shop/update-info-shop", shop.updateInfoShop); 
+    router.post("/shop/update-shop", shop.updateShop);
 
     // Order
     router.post("/order/create-new",order.orderCart  );

@@ -1,5 +1,6 @@
 import ShopModel from "../models/ShopModel";
-
+import fs from "fs-extra" ; 
+import {app} from "../config/app";
 let createNew = (item) => {
     return new Promise(async(resolve, reject) => {
         try{
@@ -63,14 +64,17 @@ let getShopByIdUser = (idUser) =>{
     })
 }; 
 
-let updateInfoShop = (fillter , data_update) => {
+let updateShop = (fillter , data_update) => {
     return new Promise(async(resolve, reject) => {
         try{
-            console.log(data_update);
-            console.log(fillter);
-            let result = await ShopModel.updateInfoShop(fillter , data_update); 
+            let result_image = await ShopModel.getImageShop(fillter) ; 
+            let result = await ShopModel.updateShop(fillter , data_update); 
             // console.log(result);
             if(result.matchedCount == 1){
+                if(result_image.imgShop !== "default-shop.png"){
+                    await fs.remove(`${app.image_shop_directory}/${result_image.imgShop}`); 
+    
+                }
                 resolve(result);
             }else{
                 resolve(false);
@@ -85,5 +89,5 @@ export default {
     checkShopUserExit,
     getShopById,
     getShopByIdUser, 
-    updateInfoShop
+    updateShop
 }

@@ -15,7 +15,7 @@ let storageImageProduct = multer.diskStorage({
             if(math.indexOf(file.mimetype) === -1){
                 return cb("lỗi chọn file", null ,  )
             }
-            let imageName =  `${Date.now()}-${file.originalname}`; 
+            let imageName =  `${Date.now()}-${Math.floor(Math.random() * 101)}-${file.originalname}`; 
             return cb(null, imageName) ; 
         }catch(error){
             return cb("lỗi chọn file", null ,  )
@@ -26,7 +26,7 @@ let storageImageProduct = multer.diskStorage({
 
 }); 
 
-let ImgProductUploadFile = multer({
+let ImgShopUploadFile = multer({
     storage: storageImageProduct,
 
 }).single("img_shop"); 
@@ -105,39 +105,43 @@ let getShopByIdUser = async(req, res) => {
     }
 }; 
 
-let updateInfoShop = async(req, res) => {
-    if(!_.isEmpty(req.body)){
-        let data_update = {
-            nameShop: req.body.nameShop,
-            phone: req.body.phone,
-            address: req.body.address,
-            updateAt: Date.now()
-        };
-        
-        let filter = {
-            idUser: req.body.idUser,
-            _id: req.body.idShop
-        }
-
-        let result = await shop.updateInfoShop(filter, data_update); 
-        if(result){
-            res.status(200).send({result:true, message: transSuccess.update});
+let updateShop = async(req, res) => {
+    ImgShopUploadFile(req, res, async(error)=> {
+        if(error){
+            res.send(transError.uploadImg);
         }else{
-            res.send({result:false, message: transError.update});
+            if(!_.isEmpty(req.body)){
+                let data_update = {
+                    nameShop: req.body.nameShop,
+                    phone: req.body.phone,
+                    address: req.body.address,
+                    imgShop :req.file.filename,
+                    updateAt: Date.now()
+                };
+                
+                let filter = {
+                    idUser: req.body.idUser,
+                    _id: req.body.idShop
+                }
+        
+                let result = await shop.updateShop(filter, data_update); 
+                if(result){
+                    res.status(200).send({result:true, message: transSuccess.update});
+                }else{
+                    res.send({result:false, message: transError.update});
+                }
+            }else{
+                res.send({result:[], message: transValidation.data_empty});
+            }
+        
         }
-    }else{
-        res.send({result:[], message: transValidation.data_empty});
-    }}
-
-let updateImageShop = async(req, res) => {
-    if(req.params.idShop){
-    }
+    })
 }
+
 
 export default {
     createNew,
     getShopById,
     getShopByIdUser,
-    updateInfoShop,
-    updateImageShop
+    updateShop
 }

@@ -41,7 +41,7 @@ export const transError = {
     product_detail: "Rất tiếc chúng tôi không tìm thấy sản phẩm này.",
     error_data: "Rất tiếc, đã xảy ra lỗi. Vui lòng kiểm tra.",
     updateUser: "Cập nhật thông tin người dùng thất bại",
-    uploadImg: "Lỗi khi tải ảnh lên",
+    uploadImg: "Lỗi khi tải ảnh lên. Vui lòng thử lại sau",
     updateProduct: "Cập nhật sản phẩm thất bại",
     not_page: "Rất tiếc, trang này không tồn tại!",
     createNewShop: "Tạo của hàng thất bại. Vui lòng thử lại sau :)",

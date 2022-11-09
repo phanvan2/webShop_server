@@ -29,7 +29,10 @@ ShopSchema.statics = {
     getShopByIdUser(idUser){
         return this.findOne({idUser: idUser}).exec(); 
     },
-    updateInfoShop(fillter, data_update){
+    getImageShop(filter){
+        return this.findOne(filter, "imgShop").exec();
+    },
+    updateShop(fillter, data_update){
         return this.update(fillter, data_update).exec();
     }
 } ; 
