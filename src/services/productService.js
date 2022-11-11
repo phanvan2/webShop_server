@@ -1,5 +1,5 @@
 import ProductModel from "../models/ProductModel"; 
-import userModel from "../models/userModel";
+import ShopModel from "../models/ShopModel";
 import {app} from "../config/app";
 import fs from "fs-extra" ; 
 import { transError, transSuccess } from "../../lang/vi";
@@ -24,21 +24,21 @@ let getProductById = (idProduct) => {
     return new Promise(async(resolve, reject) => {
         try {
             let result = await ProductModel.findProductById(idProduct) ; 
+            console.log(result);
             if(result){
-                let userInfor = await userModel.findUserById(result.idSeller) ; 
-                // console.log(userInfor)
+                let shopInfor = await ShopModel.getShopById(result.idShop) ; 
+                console.log(shopInfor)
                 let data = {
                     _id : result._id,
                     nameProduct: result.nameProduct,
-                    idSeller: {
-                        email: userInfor.local.email,
-                        _id: userInfor._id,
-                        username: userInfor.username,
-                        gender: userInfor.gender,
-                        phone: userInfor.phone,
-                        address: userInfor.address,
-                        avatar: userInfor.avatar,
-                        role: userInfor.role
+                    Shop: {
+                        idShop: shopInfor._id,
+                        nameShop: shopInfor.nameShop,
+                        imgShop: shopInfor.imgShop,
+                        address: shopInfor.address,
+                        phone: shopInfor.phone,
+                        followers:shopInfor.followers,
+                        createAt: shopInfor.createAt                
                     },
                     idCategory: result.idCategory,
                     imageProduct: result.imageProduct,
@@ -120,7 +120,7 @@ let updateProduct = (idProduct, item) => {
                 updateAt:  Date.now(),
             }
             // console.log(data_update); 
-            let result = await ProductModel.updateProduct(item.idUser, idProduct, data_update) ;
+            let result = await ProductModel.updateProduct(item.idShop, idProduct, data_update) ;
             // console.log(result);
             if(result.matchedCount == 1)
                 resolve(true);
@@ -132,7 +132,7 @@ let updateProduct = (idProduct, item) => {
     })
 }; 
 
-let updateImage = (idUser, idProduct, nameImage) => {
+let updateImage = (idShop, idProduct, nameImage) => {
     return new Promise(async(resolve, reject) => {
         try {
             let data_update = {
@@ -142,7 +142,7 @@ let updateImage = (idUser, idProduct, nameImage) => {
             
             await fs.remove(`${app.image_product_directory}/${inforProduct.imageProduct}`); 
             
-            let result = await ProductModel.updateProduct(idUser,idProduct, data_update) ;
+            let result = await ProductModel.updateProduct(idShop,idProduct, data_update) ;
             if(result.matchedCount ==1)
                 resolve(true);
             else

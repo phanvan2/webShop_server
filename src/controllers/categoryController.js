@@ -15,7 +15,7 @@ let storageAvatar = multer.diskStorage({
             if(math.indexOf(file.mimetype) === -1){
                 return cb("lỗi chọn file", null ,  )
             }
-            let avatarName =  `${Date.now()}-${file.originalname}`; 
+            let avatarName =  `${Date.now()}-${Math.floor(Math.random() * 101)}-${file.originalname}`; 
             cb(null, avatarName) ; 
         }catch(error){
             return cb("lỗi chọn file", null ,  )

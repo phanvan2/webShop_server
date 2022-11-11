@@ -33,13 +33,15 @@ let ImgProductUploadFile = multer({
 
 let createNewProduct = (req , res) => {
     ImgProductUploadFile(req, res, async(error)=> {
-        if(error){
+        if (error instanceof multer.MulterError) {
+            return res.send("lỗi multer"); 
+        }else if(error){
             console.log(error);
-            return res.status(500).send(transError.upImage);   
+            return res.send(transError.upImage);   
         }else{
             let newItem = {
                 nameProduct: req.body.nameProduct,
-                idSeller: req.body.idUser,
+                idShop: req.body.idShop,
                 idCategory: req.body.idCategory,
                 imageProduct: req.file.filename,
                 classify: {
@@ -117,10 +119,10 @@ let updateImage = async(req, res) => {
             res.status(500).send("lỗi");
         }else{
             console.log(req.body); 
-            let idUser = req.body.idUser; 
+            let idShop = req.body.idShop; 
             let nameImage = req.file.filename; 
             let idProduct = req.params.idproduct;
-            let result = await product.updateImage(idUser,idProduct, nameImage);
+            let result = await product.updateImage(idShop,idProduct, nameImage);
             if(result)
                 res.status(200).send(transSuccess.uploadImg);
             else

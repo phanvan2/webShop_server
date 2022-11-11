@@ -4,7 +4,7 @@ let Schema = mongoose.Schema;
 
 let ProductSchema = new Schema({
     nameProduct: {type: String, default: null},
-    idSeller: {type: String, default: null},
+    idShop: {type: String, default: null},
     idCategory: {type: String, default: null},
     imageProduct: {type: String, default: null},
     classify: {
@@ -38,10 +38,10 @@ ProductSchema.statics = {
         return this.where({nameProduct: {"$regex": new RegExp(search, "i")}}).count(); 
     }, 
 
-    updateProduct(idUser, idProduct, item){
+    updateProduct(idShop, idProduct, item){
         return this.update({
             $and: [
-                {idSeller: idUser},
+                {idShop: idShop},
                 {_id: idProduct}
             ]
         }, item).exec();
