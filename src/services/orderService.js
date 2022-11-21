@@ -17,10 +17,10 @@ let orderCart = (item) => {
     }) ; 
 } ; 
 
-let getCartByIdUser = (idUser) => {
+let getOrderByIdUser = (idUser) => {
     return new Promise( async(resolve, reject) => {
         try {
-            let result = await OrderModel.getCartByIdUser(idUser) ;
+            let result = await OrderModel.getOrderByIdUser(idUser) ;
             if(result){
                 resolve(result) ; 
 
@@ -70,7 +70,7 @@ let changeStatus = (idOrder, statusChange) => {
 
 export default {
     orderCart, 
-    getCartByIdUser,
+    getOrderByIdUser,
     getOrderById, 
     changeStatus
 }

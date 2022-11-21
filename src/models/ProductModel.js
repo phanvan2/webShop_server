@@ -34,8 +34,8 @@ ProductSchema.statics = {
         return this.find({nameProduct: {"$regex": new RegExp(search, "i")}}).skip(skipNumber).limit(product_limit).exec();
     },
 
-    getCountProduct(search=""){
-        return this.where({nameProduct: {"$regex": new RegExp(search, "i")}}).count(); 
+    getCountProduct(filter={}){
+        return this.where(filter).count(); 
     }, 
 
     updateProduct(idShop, idProduct, item){
@@ -59,7 +59,12 @@ ProductSchema.statics = {
 
     updateQuantity(idProduct, dataUpdate){
         return this.findOneAndUpdate({"_id": idProduct}, dataUpdate ).exec() ;
-    }
+    },
+    findProductByIdShop(skipNumber, product_limit, filter){
+        return this.find(filter).skip(skipNumber).limit(product_limit).exec();
+    },
+    
+    
 };
 
 

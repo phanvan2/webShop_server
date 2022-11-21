@@ -1,5 +1,5 @@
 import express from "express"; 
-import { user, product, category, feedback, shop, order} from "../controllers/index" ; 
+import { user, product, category, feedback, shop, order, cart} from "../controllers/index" ; 
 import getFileImage from "../helpers/getFile";
 
 let router = express.Router(); 
@@ -19,16 +19,19 @@ let initRouter = (app) => {
     router.post("/update-image-user/:idUser", user.updateImgUser);
     router.post("/check-pass-user/:idUser", user.checkPassUser);
     router.get("/get-normal-user/:idUser", user.getNormalUser) ; 
+    router.post("/user/active-email", user.verifyEmail);
     // router.post("/user/change-password/", user.changePassWord) ; 
 
-    router.post("/add-new-product/", product.createNewProduct);
-    router.get("/detail-product", product.getProductById);
-    router.get("/all-product/:page", product.getAllProduct) ; 
-    router.post("/updae-image-product/:idproduct",product.updateImage );
-    router.post("/update-product/:idproduct", product.updateProduct);
-    router.get("/count-all-product", product.countProduct); 
+    router.post("/add-new-product/", product.createNewProduct); // thêm sản phẩm   
+    router.get("/detail-product", product.getProductById); // lấy thông tin chi tiết một sản phẩm theo id
+    router.get("/all-product/:page", product.getAllProduct) ; // lấy sản phẩm theo tìm kiếm hoặc ko và có phân trang
+    router.post("/updae-image-product/:idproduct",product.updateImage ); // cập nhật hình ảnh sản phẩm
+    router.post("/update-product/:idproduct", product.updateProduct); // cập nhật thông tin sản phẩm
+    router.get("/count-all-product", product.countProduct);  // đếm số lượng sản phẩm
     // router.get("/product-search/", product.searchProduct);
-    router.get("/product/get-by-idcategory/:idCategory", product.getProductByIdCategory); 
+    router.get("/product/get-by-idcategory/:idCategory", product.getProductByIdCategory); // lấy danh sách sản phẩm theo id hàng hóa
+    router.get("/product/get-product-idShop/:idShop/:page", product.getListProductByidShop); // lấy danh sách sản phẩm theo id hàng hóa
+
     
     router.get('/images/:path/:name_image', getFileImage);
 
@@ -48,9 +51,15 @@ let initRouter = (app) => {
 
     // Order
     router.post("/order/create-new",order.orderCart  );
-    router.get("/order/getall/:idUser", order.getCartByIdUser) ; 
+    router.get("/order/getall/:idUser", order.getOrderByIdUser) ; 
     router.get("/order/get-id/:idOrder", order.getOrderById) ; 
     router.post("/order/change-status-order", order.changeStatus); 
+
+    // Cart ----------
+    router.post("/cart/add-new-product", cart.addItemCart) ; // thêm một sản phẩm vào trong giỏ hàng 
+    router.get("/cart/get-cart-by-idUser/:idUser", cart.getItemCartByIdUser) ; // lấy danh sách giỏ hàng theo id người dùng 
+    router.post("/cart/remove-product-cart", cart.removeCart) ; // xóa một sản phẩm nào đó trong giỏ hàng 
+
     
     return app.use("/", router);
 }

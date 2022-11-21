@@ -6,6 +6,6 @@ export const app = {
 
     image_type: ['image/png', "image/jpg", "image/jpeg"],
     limit_product: 8,
-    limit_feedback: 5, 
+    limit_feedback: 4, 
     status_order: ["Đang chờ xác nhận", "Xác nhận thành công, đang chuẩn bị hàng", "Đang vận chuyển","giao hàng thành công", "Đơn hàng đã bị hủy"]
 }; 

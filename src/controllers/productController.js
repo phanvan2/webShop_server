@@ -164,6 +164,19 @@ let getProductByIdCategory = async(req, res) => {
     }
 }
 
+let getListProductByidShop = async(req, res) =>{
+    if(req.params.page  || req.params.idShop){
+        let idShop = req.params.idShop ; 
+        let page = req.params.page;
+        let result = await product.getProductByIdShop(page, idShop); 
+        if(result){
+            res.status(200).send(result);
+        }else{
+            res.send({result: false, message: transError.error_data});
+        }
+    }
+}
+
 export default {
     createNewProduct, 
     getProductById, 
@@ -172,6 +185,7 @@ export default {
     updateImage, 
     countProduct, 
     // searchProduct,
-    getProductByIdCategory
+    getProductByIdCategory, 
+    getListProductByidShop
 }; 
 

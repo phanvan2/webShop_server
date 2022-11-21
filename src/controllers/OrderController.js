@@ -22,9 +22,9 @@ let orderCart = async(req, res) => {
 }
 
 
-let getCartByIdUser = async(req, res) => {
+let getOrderByIdUser = async(req, res) => {
     if(req.params.idUser) {
-        let result = await order.getCartByIdUser(req.params.idUser) ; 
+        let result = await order.getOrderByIdUser(req.params.idUser) ; 
         if(result){
             res.status(200).send(result) ; 
 
@@ -69,7 +69,7 @@ let changeStatus = async(req, res) => {
 
 export default {
     orderCart, 
-    getCartByIdUser,
+    getOrderByIdUser,
     getOrderById, 
     changeStatus
 }

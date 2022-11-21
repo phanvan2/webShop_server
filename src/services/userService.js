@@ -1,10 +1,11 @@
 import userModel from "../models/userModel" ;
+import ShopModel from "../models/ShopModel";
 import { transValidation, transSuccess } from "../../lang/vi";
 import {app} from "../config/app" ;
+import  sendMail from "../config/mailer"
 
 import bcrypt from "bcrypt"; 
 import fs from "fs-extra" ; 
-import { user } from ".";
 
 let createNew =  (item ) => {
     return new Promise(async (resolve, reject) => {
@@ -48,9 +49,14 @@ let loginUser = (item) => {
                         avatar: userItem.avatar,
                         role: userItem.role,
                         createAt: userItem.createAt,
-                        gender: userItem.gender
+                        gender: userItem.gender,
                         
                     }
+                    let shopInfor = await ShopModel.getShopByIdUser(userItem._id);
+                    if(shopInfor) {
+                      userInfor.shopInfor = shopInfor;
+                    }
+                    
                     resolve(userInfor);
                 }else{
                     resolve(false);
@@ -150,4 +156,25 @@ let checkPassUser = (idUser, password) => {
     
 }
 
-export default {createNew, loginUser, updateUser, checkPassUser, updateImageUser, getNormalUser} ; 
+let verifyEmail = (idUser) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let userItem = await userModel.findUserById(idUser); 
+            if(userItem){
+                let email = userItem.local.email; 
+                console.log(email);
+                sendMail(email, "Tiêu đề test", "oke bro")
+                resolve(true) ; 
+              
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(false); 
+
+        }
+    })
+}; 
+
+
+export default {createNew, loginUser, updateUser, checkPassUser, updateImageUser, getNormalUser, verifyEmail} ; 
