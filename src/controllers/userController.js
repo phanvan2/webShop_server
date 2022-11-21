@@ -132,4 +132,14 @@ let checkPassUser = async(req, res) => {
         }
     }
 }
-export default  {regissterUser, loginUser, updateUser, checkPassUser, updateImgUser, getNormalUser} ; 
+
+let verifyEmail = async(req, res) => {
+    if(!_.isEmpty(req.body)){
+        let idUser = req.body.idUser; 
+        let result = await user.verifyEmail(idUser); 
+        res.send(result);
+    }
+    res.send(result);
+
+}
+export default  {regissterUser, loginUser, updateUser, checkPassUser, updateImgUser, getNormalUser, verifyEmail} ; 

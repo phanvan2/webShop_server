@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 let Schema = mongoose.Schema ; 
 
-let CartSchema = new Schema({
+let OrderSchema = new Schema({
     idUser: String,
     productItems:[{
         idProduct: String,
@@ -24,11 +24,11 @@ let CartSchema = new Schema({
     deleteAt: {type: Number, default: null}
 }); 
 
-CartSchema.statics = {
+OrderSchema.statics = {
     createNew(item) {
         return this.create(item);
     },
-    getCartByIdUser(idUser){
+    getOrderByIdUser(idUser){
         return this.find({idUser: idUser}).exec(); 
     },
     getOrderById(id){
@@ -39,5 +39,5 @@ CartSchema.statics = {
     }
 }
 
-export default mongoose.model("order", CartSchema); 
+export default mongoose.model("order", OrderSchema); 
 

@@ -17,7 +17,7 @@ FeedbackSchema.statics = {
         return this.create(item);
     },
     getFeedBack(skipNumber, idProduct, feedback_limit){
-        return this.find({idProduct: idProduct}).skip(skipNumber).limit(feedback_limit).exec();
+        return this.find({idProduct: idProduct}).sort({createAt: "desc"}).skip(skipNumber).limit(feedback_limit).exec();
     },
     getCountFeedBack(idProduct){
         return this.where({idProduct: idProduct}).count(); 

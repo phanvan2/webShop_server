@@ -63,7 +63,10 @@ let getProductById = (idProduct) => {
 let getAllProduct = (page, key_search) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let count_product = await ProductModel.getCountProduct(key_search);
+            let filter = {
+                nameProduct: {"$regex": new RegExp(key_search, "i")}
+            };
+            let count_product = await ProductModel.getCountProduct(filter);
             // console.log(count_product)  ; 
             if(count_product == 0){ // nếu ko tìm tháy sản phẩmphẩm
                 resolve([]) ;  // muốn tra về như thế này ko a 
@@ -226,6 +229,23 @@ let updateQuantity = (idProduct, quantity) => {
 
     })}
 
+let getProductByIdShop = (page, idShop) => {
+    return new Promise(async(resolve, reject)=> {
+        try {
+            // let count_product = await ProductModel.getCountProduct(key_search);
+
+            let filter = {
+                idShop: idShop
+            }
+            let result = await ProductModel.findProductByIdShop(0,8, filter);
+            if(result)
+                resolve(result);
+            else
+                resolve(false);        
+            } catch (error) {
+        }
+})}
+
 export default {
     addNewProduct, 
     getProductById, 
@@ -237,5 +257,6 @@ export default {
     getProductByIdCategory, 
     // checkProductSoldOut,
     // checkListProductSoldOut,
-    updateQuantity
+    updateQuantity,
+    getProductByIdShop
 }; 
