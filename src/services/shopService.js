@@ -1,6 +1,7 @@
 import ShopModel from "../models/ShopModel";
 import fs from "fs-extra" ; 
 import {app} from "../config/app";
+
 let createNew = (item) => {
     return new Promise(async(resolve, reject) => {
         try{
@@ -84,6 +85,40 @@ let updateShop = (fillter , data_update) => {
         }
     })
 }
+
+let getStatistical = (idShop) => {
+    return new Promise(async(resolve, reject) => {
+        try{
+                // get số lượng đơn hàng
+
+                // get tổng doanh thu 
+
+                // get tổng sản phẩm
+
+                
+                let result = {
+                    total_order: 1111, 
+                    total_revenue: 2222,
+                    stati_order: [
+                        [
+                            { time : "jfksdf"}, 
+                            {revenue: 4328940}
+                        ],
+                        [
+                            { time : "jfksdf"}, 
+                            {revenue: 4328940}
+                        ],
+                    ]
+                }
+
+
+        } catch (error) {
+            reject(false);
+        }
+    })
+
+}
+
 export default {
     createNew,
     checkShopUserExit,

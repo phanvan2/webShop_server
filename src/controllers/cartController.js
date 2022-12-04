@@ -6,11 +6,11 @@ let addItemCart = async(req ,res) => {
         let data = {
             idUser: req.body.idUser,
             product: {
-             idProduct: req.body.idProduct,
-             nameProduct: req.body.nameProduct,
-             imgProduct: req.body.imgProduct,
-             quantity: req.body.quanity,
-             unit_price: req.body.unit_price,
+                idProduct: req.body.idProduct,
+                nameProduct: req.body.nameProduct,
+                imgProduct: req.body.imgProduct,
+                quantity: req.body.quanity,
+                unit_price: req.body.unit_price,
             },
         }
         console.log(data) ; 
