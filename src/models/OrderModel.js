@@ -4,6 +4,7 @@ let Schema = mongoose.Schema ;
 
 let OrderSchema = new Schema({
     idUser: String,
+    idShop: String,
     productItems:[{
         idProduct: String,
         nameProduct: String,
@@ -36,6 +37,10 @@ OrderSchema.statics = {
     },
     updateStatus(idOrder, statusChange){
         return this.update({_id: idOrder}, {status: statusChange}).exec() ; 
+    },
+    
+    getPriceOrderByIdShop(idShop){
+        return this.find({idShop: idShop}, "idShop totalPrice createAt")
     }
 }
 

@@ -4,6 +4,7 @@ let Schema = mongoose.Schema ;
 
 let FeedbackSchema = new Schema({
     idUser: {type: String, default: null},
+    idShop: {type:String, default: null},
     idProduct: {type: String, default: null},
     rate: {type: Number, default: null }, // value: 1, 2,3 ,4 ,5 
     comment: {type: String, default: null},

@@ -1,7 +1,7 @@
 import _ from "lodash";  
 import multer from "multer"; 
 
-import {shop} from "../services/index" ; 
+import {shop, order} from "../services/index" ; 
 import {app} from "../config/app"; 
 import {transError, transSuccess, transValidation} from "../../lang/vi";
 
@@ -138,10 +138,21 @@ let updateShop = async(req, res) => {
     })
 }
 
+let getStatistical = async(req, res) => {
+    if(req.params.idShop){
+        let result = await order.getPriceOrderByIdShop(req.params.idShop); 
+        res.status(200).send(result)  
+    }else{
+        res.send("lỗi qq") ; 
+    }
+
+}
+
 
 export default {
     createNew,
     getShopById,
     getShopByIdUser,
-    updateShop
+    updateShop, 
+    getStatistical
 }
