@@ -106,7 +106,7 @@ let getPriceOrderByIdShop = (idShop) => {
                             }else{
                                 return {
                                     time: new Date(`${year}-${month}`) ,
-                                    price: item1.price + item_total.price
+                                    price: Number(item1.price + item_total.price)
                                 }
                             }
                         })
