@@ -32,6 +32,8 @@ let ImgProductUploadFile = multer({
 }).single("image_product"); 
 
 let createNewProduct = (req , res) => {
+    console.log("đã gửi product") ; 
+    console.log(req) ; 
     ImgProductUploadFile(req, res, async(error)=> {
         if (error instanceof multer.MulterError) {
             return res.send("lỗi multer"); 
