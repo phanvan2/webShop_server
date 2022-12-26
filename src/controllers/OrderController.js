@@ -52,6 +52,21 @@ let getOrderById = async(req, res) => {
     }
 }; 
 
+let getListOrderByIdShop = async(req, res) => {
+    if(req.params.idShop) {
+        let result = await order.getListOrderByIdShop(req.params.idShop) ; 
+        if(result){
+            res.status(200).send(result) ; 
+
+        }else{
+            res.send([])
+        }
+    }else{
+        res.send([]) ; 
+
+    }
+}; 
+
 let changeStatus = async(req, res) => {
     if(_.isEmpty(req.body)){
         res.send(transValidation.data_empty) ; 
@@ -71,7 +86,8 @@ export default {
     orderCart, 
     getOrderByIdUser,
     getOrderById, 
-    changeStatus
+    changeStatus,
+    getListOrderByIdShop
 }
 
 

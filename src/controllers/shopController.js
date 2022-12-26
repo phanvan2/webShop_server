@@ -140,7 +140,8 @@ let updateShop = async(req, res) => {
 
 let getStatistical = async(req, res) => {
     if(req.params.idShop){
-        let result = await order.getPriceOrderByIdShop(req.params.idShop); 
+        let result = await order.getStatisticalOrderByIdShop(req.params.idShop); 
+        
         res.status(200).send(result)  
     }else{
         res.send("lỗi qq") ; 

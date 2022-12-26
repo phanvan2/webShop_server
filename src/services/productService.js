@@ -244,7 +244,9 @@ let getProductByIdShop = (page, idShop) => {
                 resolve(false);        
             } catch (error) {
         }
-})}
+})};
+
+
 
 export default {
     addNewProduct, 

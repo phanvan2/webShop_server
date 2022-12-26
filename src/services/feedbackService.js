@@ -1,6 +1,7 @@
 import feedbackModel from "../models/FeedbackModel" ; 
 import {app} from "../config/app";
 import userModel from "../models/userModel";
+import ProductModel from "../models/ProductModel";
 
 const limit_feedback = app.limit_feedback; 
 let createNew = (item) => {
@@ -8,13 +9,19 @@ let createNew = (item) => {
 
     return new Promise( async(resolve, reject) => {
         try {
+            
+            let data1 = await ProductModel.findProductById(item.idProduct) ; 
             let data = {
                 idUser: item.idUser,
-                idProduct: item.idProduct,
+                product: {
+                    idProduct: item.idProduct,
+                    idShop: data1.idShop
+                },
                 rate: item.rate,
                 comment: item.comment
             }; 
             let result = await feedbackModel.createNew(data) ; 
+
             console.log(result);  
             if(result){
                 resolve(true); 
@@ -44,7 +51,7 @@ let getfeedback = async(page, idProduct) => {
                             username: userInfor.username,
                             avatar: userInfor.avatar
                         }, 
-                        "idProduct": item.idProduct,
+                        "idProduct": item.product.idProduct,
                         "rate": item.rate,
                         "comment": item.comment,
                         "createAt": item.createAt,
@@ -81,7 +88,7 @@ let getfeedback = async(page, idProduct) => {
                                     username: userInfor.username,
                                     avatar: userInfor.avatar
                                 }, 
-                                "idProduct": item.idProduct,
+                                "idProduct": item.product.idProduct,
                                 "rate": item.rate,
                                 "comment": item.comment,
                                 "createAt": item.createAt,
@@ -110,8 +117,84 @@ let getfeedback = async(page, idProduct) => {
         
     }); 
 }
+
+
+// thống kê theo id product
+let getStatiFeedBackByIdProduct = async(idProduct) => {
+    return new Promise(async (resolve, reject) => {
+        console.log("service") ; 
+        try {
+           let result = await feedbackModel.getNormalFeedBack(idProduct); 
+           let star = {
+            star_1 : 0, 
+            star_2 : 0, 
+            star_3 : 0, 
+            star_4 : 0, 
+            star_5 : 0, 
+           }
+           result.map((item) => {
+            if(item.rate === 1)
+                star.star_1 += 1  ;
+            else if(item.rate === 2)
+                star.star_2 += 1  ;
+            else if(item.rate === 3)
+                star.star_3 += 1  ;
+            else if(item.rate === 4)
+                star.star_4 += 1  ;
+            else if(item.rate === 5)
+                star.star_5 += 1  ;
+           })
+           let result_ = {
+                quanityFeedback: result.length,
+                star: star,
+           }
+           resolve(result_) ; 
+        } catch (error) {
+            reject(false);
+        }
+        
+    }); 
+}
+
+let getStatiFeedBackByIdShop = async(idShop) => {
+    return new Promise(async (resolve, reject) => {
+        console.log("service") ; 
+        try {
+           let result = await feedbackModel.getStatiFeedBackByIdShop(idShop); 
+           let star = {
+            star_1 : 0, 
+            star_2 : 0, 
+            star_3 : 0, 
+            star_4 : 0, 
+            star_5 : 0, 
+           }
+           result.map((item) => {
+            if(item.rate === 1)
+                star.star_1 += 1  ;
+            else if(item.rate === 2)
+                star.star_2 += 1  ;
+            else if(item.rate === 3)
+                star.star_3 += 1  ;
+            else if(item.rate === 4)
+                star.star_4 += 1  ;
+            else if(item.rate === 5)
+                star.star_5 += 1  ;
+           })
+           let result_ = {
+                quanityFeedback: result.length,
+                star: star,
+           }
+           resolve(result_) ; 
+        } catch (error) {
+            reject(false);
+        }
+        
+    }); 
+}
 export default {
     createNew,
-    getfeedback
+    getfeedback,
+    getStatiFeedBackByIdProduct,
+    getStatiFeedBackByIdShop
 }
 

@@ -51,6 +51,24 @@ let getOrderById = (idOrder) => {
     }) ; 
 } ; 
 
+// get list order by idShop
+let getListOrderByIdShop = (idShop) => {
+    return new Promise( async(resolve, reject) => {
+        try {
+            let result = await OrderModel.getListOrderByIdShop(idShop) ;
+            if(result){
+                resolve(result) ; 
+
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(error);
+        }
+
+    }) ; 
+} ; 
+
 let changeStatus = (idOrder, statusChange) => {
     return new Promise( async(resolve, reject) => {
         try {
@@ -68,14 +86,15 @@ let changeStatus = (idOrder, statusChange) => {
     }) ; 
 }
 
-let getPriceOrderByIdShop = (idShop) => {
+let getStatisticalOrderByIdShop = (idShop) => {
     return new Promise( async(resolve, reject) => {
         try {
-            let result = await OrderModel.getPriceOrderByIdShop(idShop) ;
+            let result = await OrderModel.getStatisticalOrderByIdShop(idShop) ;
             if(result){
                 let result_ = {
                     idShop: idShop,
                     totalPrice: 0,
+                    quanityOrder: result.length,
                     total: []
                 }
                 
@@ -115,7 +134,7 @@ let getPriceOrderByIdShop = (idShop) => {
                     }
 
                     // result_.total = total; 
-                    result_.totalPrice = result_ + Number(item.totalPrice);
+                    result_.totalPrice = Number(result_ .totalPrice)+ Number(item.totalPrice);
                 })
 
 
@@ -137,7 +156,9 @@ export default {
     getOrderByIdUser,
     getOrderById, 
     changeStatus,
-    getPriceOrderByIdShop
+    getStatisticalOrderByIdShop,
+    getListOrderByIdShop,
+    
 }
 
 

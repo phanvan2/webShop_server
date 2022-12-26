@@ -19,13 +19,41 @@ let getFeedback = async(req, res) => {
         if(result){
             res.status(200).send(result);
         }else{
-            res.status(200).send({result: true, message: transError.error_data});
+            res.send({result: true, message: transError.error_data});
+        }
+    }
+}; 
+
+let getStatiFeedBackByIdProduct = async(req, res) => {
+    if(req.params.idProduct){
+        console.log("phản hồi controller ") ;
+        console.log(req.params.idProduct);
+        let result = await feedback.getStatiFeedBackByIdProduct(req.params.idProduct); 
+        if(result){
+            res.status(200).send(result);
+        }else{
+            res.send({result: true, message: transError.error_data});
+        }
+    }
+};
+
+let getStatiFeedBackByIdShop = async(req, res) => {
+    if(req.params.idShop){
+        console.log("phản hồi controller ") ;
+        console.log(req.params.idShop);
+        let result = await feedback.getStatiFeedBackByIdShop(req.params.idShop); 
+        if(result){
+            res.status(200).send(result);
+        }else{
+            res.send({result: true, message: transError.error_data});
         }
     }
 }
 
 export default {
     createNew,
-    getFeedback
+    getFeedback,
+    getStatiFeedBackByIdProduct,
+    getStatiFeedBackByIdShop
 }
 
