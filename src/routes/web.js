@@ -42,6 +42,9 @@ let initRouter = (app) => {
     // feedback ( comment, rate star)
     router.post("/feedback-user", feedback.createNew); 
     router.get("/get-feedback/:idProduct/:page", feedback.getFeedback);
+    router.get("/feedback/get-statistical-idproduct/:idProduct", feedback.getStatiFeedBackByIdProduct) ; 
+    router.get("/feedback/get-statistical-idshop/:idShop", feedback.getStatiFeedBackByIdShop) ; 
+
 
     // Shop
     router.post("/shop/create-new", shop.createNew);
@@ -55,6 +58,7 @@ let initRouter = (app) => {
     router.get("/order/getall/:idUser", order.getOrderByIdUser) ; 
     router.get("/order/get-id/:idOrder", order.getOrderById) ; 
     router.post("/order/change-status-order", order.changeStatus); 
+    router.get("/order/get-listorder-by-idshop/:idShop", order.getListOrderByIdShop); 
 
     // Cart ----------
     router.post("/cart/add-new-product", cart.addItemCart) ; // thêm một sản phẩm vào trong giỏ hàng 

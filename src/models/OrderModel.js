@@ -41,6 +41,9 @@ OrderSchema.statics = {
     
     getPriceOrderByIdShop(idShop){
         return this.find({idShop: idShop}, "idShop totalPrice createAt")
+    }, 
+    getListOrderByIdShop(idShop) {
+        return this.find({idShop: idShop}).sort({'updatedAt': -1});
     }
 }
 
