@@ -50,7 +50,9 @@ let initRouter = (app) => {
     router.post("/shop/create-new", shop.createNew);
     router.get("/shop/get-shop/:idShop", shop.getShopById); 
     router.get("/shop/get-shop-by-user/:idUser", shop.getShopByIdUser);
-    router.post("/shop/update-shop", shop.updateShop);
+    router.post("/shop/update-shop-info", shop.updateShopInfor);
+    router.post("/shop/update-shop-image", shop.updateShopImage);
+
     router.get("/shop/statistical-by-idShop/:idShop", shop.getStatistical) ; 
 
     // Order

@@ -105,38 +105,62 @@ let getShopByIdUser = async(req, res) => {
     }
 }; 
 
-let updateShop = async(req, res) => {
+let updateShopImage = async(req, res) => {
+    console.log("oke jlkjdsaaaaaaaaaaaaaaa")
+    console.log(req) ; 
     ImgShopUploadFile(req, res, async(error)=> {
         if(error){
             res.send(transError.uploadImg);
         }else{
             if(!_.isEmpty(req.body)){
                 let data_update = {
-                    nameShop: req.body.nameShop,
-                    phone: req.body.phone,
-                    address: req.body.address,
                     imgShop :req.file.filename,
                     updateAt: Date.now()
                 };
-                
+
                 let filter = {
                     idUser: req.body.idUser,
                     _id: req.body.idShop
-                }
+                };
         
-                let result = await shop.updateShop(filter, data_update); 
+                let result = await shop.updateShopImage(filter, data_update); 
                 if(result){
                     res.status(200).send({result:true, message: transSuccess.update});
                 }else{
                     res.send({result:false, message: transError.update});
                 }
             }else{
-                res.send({result:[], message: transValidation.data_empty});
+                res.send({result:false, message: transValidation.data_empty});
             }
         
         }
     })
 }
+
+let updateShopInfor = async(req, res) => {
+    if(!_.isEmpty(req.body)){
+        let data_update = {
+            nameShop: req.body.nameShop,
+            phone: req.body.phone,
+            address: req.body.address,
+            updateAt: Date.now()
+        };
+        let filter = {
+            idUser: req.body.idUser,
+            _id: req.body.idShop
+        }
+
+        let result = await shop.updateShopInfor(filter, data_update); 
+        if(result){
+            res.status(200).send({result:true, message: transSuccess.update});
+        }else{
+            res.send({result:false, message: transError.update});
+        }
+    }else{
+        res.send({result:false, message: transValidation.data_empty});
+    }
+}
+
 
 let getStatistical = async(req, res) => {
     if(req.params.idShop){
@@ -154,6 +178,7 @@ export default {
     createNew,
     getShopById,
     getShopByIdUser,
-    updateShop, 
+    updateShopInfor,
+    updateShopImage,
     getStatistical
 }

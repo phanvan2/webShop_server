@@ -65,17 +65,34 @@ let getShopByIdUser = (idUser) =>{
     })
 }; 
 
-let updateShop = (fillter , data_update) => {
+let updateShopImage = (fillter , data_update) => {
     return new Promise(async(resolve, reject) => {
         try{
             let result_image = await ShopModel.getImageShop(fillter) ; 
             let result = await ShopModel.updateShop(fillter , data_update); 
             // console.log(result);
             if(result.matchedCount == 1){
-                if(result_image.imgShop !== "default-shop.png"){
+                if(result_image.imgShop !== "default-shop.png" && data_update.imgShop){
                     await fs.remove(`${app.image_shop_directory}/${result_image.imgShop}`); 
     
                 }
+                resolve(result);
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(false);
+        }
+    })
+}
+
+
+let updateShopInfor = (fillter , data_update) => {
+    return new Promise(async(resolve, reject) => {
+        try{
+            let result = await ShopModel.updateShop(fillter , data_update); 
+            // console.log(result);
+            if(result.matchedCount == 1){
                 resolve(result);
             }else{
                 resolve(false);
@@ -124,5 +141,6 @@ export default {
     checkShopUserExit,
     getShopById,
     getShopByIdUser, 
-    updateShop
+    updateShopInfor,
+    updateShopImage
 }

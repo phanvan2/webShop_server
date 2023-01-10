@@ -104,33 +104,41 @@ let getStatisticalOrderByIdShop = (idShop) => {
                 
                 result.map((item) => {
                     let date = new Date(item.createAt) ; 
-                    console.log(date) ; 
                     let month = date.getMonth() + 1; 
                     let year = date.getFullYear(); 
 
                     let item_total = {
-                        time: new Date(`${year}-${month}`) ,
+                        time: `${year}-${month}`,
                         price: Number(item.totalPrice)
                     }
-                    console.log(item_total); 
+
                     if(total.length < 1) {
                         total.push(item_total) ; 
 
                     }else{
+                        let checkk = 0; // 0 chưa xác định , 1 ko trùng năm , 2 là trùng năm
                         total = total.map((item1) => {
                             if( item1.time.toString() != item_total.time.toString()){
-    
-                                total.push(item_total) ; 
-    
+                                checkk = 1
+                                return {
+                                    time: item1.time.toString(),
+                                    price: Number(item1.price)
+                                };                            
                             }else{
                                 return {
-                                    time: new Date(`${year}-${month}`) ,
+                                    time: `${year}-${month}`,
                                     price: Number(item1.price + item_total.price)
                                 }
                             }
+
                         })
+                        if(checkk === 1){
+                            total.push(item_total) ; 
+
+                        }
+
                         result_.total = total;  
-                        // console.log(total)
+                       
                     }
 
                     // result_.total = total; 
