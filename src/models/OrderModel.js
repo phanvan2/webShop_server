@@ -39,7 +39,7 @@ OrderSchema.statics = {
         return this.update({_id: idOrder}, {status: statusChange}).exec() ; 
     },
     
-    getPriceOrderByIdShop(idShop){
+    getStatisticalOrderByIdShop(idShop){
         return this.find({idShop: idShop}, "idShop totalPrice createAt")
     }, 
     getListOrderByIdShop(idShop) {
