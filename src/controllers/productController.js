@@ -102,9 +102,12 @@ let getAllProduct = async( req, res) => {
 } ; 
 
 let updateProduct = async(req, res) => {
+    console.log("update product"); 
     if(_.isEmpty(req.body)){
+        
         res.send(transValidation.data_empty);
     }else{
+        console.log(req.body) ; 
         let result = await product.updateProduct(req.params.idproduct, req.body);
         if(result){
             res.status(200).send({result: true, message: transSuccess.updateProduct});
@@ -126,9 +129,9 @@ let updateImage = async(req, res) => {
             let idProduct = req.params.idproduct;
             let result = await product.updateImage(idShop,idProduct, nameImage);
             if(result)
-                res.status(200).send(transSuccess.uploadImg);
+                res.status(200).send({result: true, message:transSuccess.uploadImg});
             else
-                res.send(transError.upImage);
+                res.send({result: false, message: transError.upImage});
         }
     })
 };
