@@ -1,6 +1,6 @@
 import _ from "lodash" ; 
-import {cart} from "../services/index" ; 
-
+import {cart} from "../services/index" ;
+ 
 let addItemCart = async(req ,res) => {
     if(!_.isEmpty(req.body)){
         let data = {
@@ -9,7 +9,7 @@ let addItemCart = async(req ,res) => {
                 idProduct: req.body.idProduct,
                 nameProduct: req.body.nameProduct,
                 imgProduct: req.body.imgProduct,
-                quantity: req.body.quanity,
+                quantity: req.body.quantity,
                 unit_price: req.body.unit_price,
             },
         }

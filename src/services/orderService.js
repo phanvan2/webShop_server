@@ -1,15 +1,41 @@
 import OrderModel from "../models/OrderModel" ; 
-
+import productService from "./productService";
 let orderCart = (item) => {
     return new Promise( async(resolve, reject) => {
         try {
+            // let oke = true ; 
+            //  item.productItems.map( (value) => {
+            //     console.log("helo 1")
+
+            //     let resultCheck =  productService.checkQuanity(value.idProduct, value.quantity);
+            //     resultCheck.then((result) => {
+            //         console.log("kết quả") ;
+            //         console.log(result) 
+            //         if(!result){
+            //             oke = false ; 
+
+            //         }
+            //     })
+            //     console.log("helo ok eba y")
+            // })
+
+            // console.log("hiên đê") ; 
+            // console.log(oke) ; 
+            // if(oke) 
+            //     console.log("Hello every body"); 
+            // else{
+            //     console.log("oke bro") ;    
+            // }
             let result = await OrderModel.createNew(item); 
             if(result){
+                item.productItems.map((value) => {
+                    productService.updateQuantity(value.idProduct, value.quantity) ; 
+                })
                 resolve(result);
             }else{
                 resolve(false);
-    
-            }
+            resolve(true);
+             }
         } catch (error) {
             reject(error);
         }
@@ -20,6 +46,7 @@ let orderCart = (item) => {
 let getOrderByIdUser = (idUser) => {
     return new Promise( async(resolve, reject) => {
         try {
+
             let result = await OrderModel.getOrderByIdUser(idUser) ;
             if(result){
                 resolve(result) ; 

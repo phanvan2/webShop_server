@@ -209,8 +209,8 @@ let updateQuantity = (idProduct, quantity) => {
     return new Promise(async(resolve, reject)=> {
         try {
             let quantiyProduct = await ProductModel.getQuantityById(idProduct); 
-            // console.log("số lượng sản phẩm hiện tại"); 
-
+            console.log("số lượng sản phẩm hiện tại"); 
+            console.log(quantiyProduct.quantity);
             let changed_quantity = Number(quantiyProduct.quantity) - Number(quantity) ; 
             let data_update = {
                 "quantity": changed_quantity, 
@@ -218,8 +218,8 @@ let updateQuantity = (idProduct, quantity) => {
 
             }; 
             let result = await ProductModel.updateQuantity(idProduct, data_update) ; 
-            // console.log("Kết quả cập nhật sản phẩm số lượng sản phẩm");
-            // console.log(result) ; 
+            console.log("Kết quả cập nhật sản phẩm số lượng sản phẩm");
+            console.log(result) ; 
             if(result.matchedCount == 1)
                 resolve(true);
             else
@@ -227,7 +227,28 @@ let updateQuantity = (idProduct, quantity) => {
             } catch (error) {
         }
 
-    })}
+})}
+
+
+let checkQuanity = (idProduct, quanity) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            console.log("product service")
+            console.log(idProduct) 
+            console.log(quanity) 
+            let result = await ProductModel.getQuantityById(idProduct) ; 
+            console.log(result.quantity) ;
+            if(result.quantity > quanity) {
+                resolve(true)
+            }else {
+                resolve(false) ; 
+            }
+        } catch (error) {
+            reject(false);
+
+        }
+    })
+}
 
 let getProductByIdShop = (page, idShop) => {
     return new Promise(async(resolve, reject)=> {
@@ -260,5 +281,6 @@ export default {
     // checkProductSoldOut,
     // checkListProductSoldOut,
     updateQuantity,
-    getProductByIdShop
+    getProductByIdShop,
+    checkQuanity
 }; 
