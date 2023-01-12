@@ -72,7 +72,7 @@ let changeStatus = async(req, res) => {
         res.send(transValidation.data_empty) ; 
     }else{
         let idOrder = req.body.idOrder ; 
-        let status = String(req.body.statusOrder); 
+        let status = Number(req.body.statusOrder); 
         let result = await order.changeStatus(idOrder, status) ;   
         if(result){
             res.status(200).send(transSuccess.changeStatus) ; 

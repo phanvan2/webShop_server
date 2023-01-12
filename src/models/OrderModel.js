@@ -15,7 +15,8 @@ let OrderSchema = new Schema({
     namedReceiver: {type: String, default: null},   // tên người nhận hàng
     addressReceiver: {type: String, default: null}, // địa chỉ người nhận hàng 
     phoneReceiver: {type: Number, default: null},   // số điện thoại người nhận hàng
-    status: {type: String, default: "Đang chờ xác nhận"},          // trạng thái đơn hàng 
+    status: {type: Number, default:1},          // trạng thái đơn hàng 
+    // ["đang chờ xác nhận", "đang vận chuyển", "đang giao hàng", "đã giao hàng", "đã thanh toán", "đơn hàng đã bị hủy"]
     payment:{type:String, default: ""},             // phương thức thanhh toán
     totalPrice: {type: String, default: 0},
     message: {type: String, default: ""},
