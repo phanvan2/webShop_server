@@ -20,7 +20,7 @@ let initRouter = (app) => {
     router.post("/check-pass-user/:idUser", user.checkPassUser);
     router.get("/get-normal-user/:idUser", user.getNormalUser) ; 
     router.post("/user/active-email", user.verifyEmail);
-    // router.get("/getQuanityUser", user.getQuanity) ;
+    router.get("/getQuanityUser", user.getQuanity) ;
     router.get("/get-list-user", user.getListUser) ; 
     // router.post("/user/change-password/", user.changePassWord) ; 
 
@@ -54,7 +54,7 @@ let initRouter = (app) => {
     router.get("/shop/get-shop-by-user/:idUser", shop.getShopByIdUser);
     router.post("/shop/update-shop-info", shop.updateShopInfor);
     router.post("/shop/update-shop-image", shop.updateShopImage);
-
+    router.get("/shop/count-shop", shop.countShop) ;
     router.get("/shop/statistical-by-idShop/:idShop", shop.getStatistical) ; 
 
     // Order

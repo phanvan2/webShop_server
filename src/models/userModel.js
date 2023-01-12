@@ -43,6 +43,9 @@ userSchema.statics = {
     },
     getListUser(){
         return this.find({}).exec() ; 
+    },
+    getQuanity(){
+        return this.count({}).exec() ;
     }
   
 }

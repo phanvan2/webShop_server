@@ -86,6 +86,22 @@ let updateShopImage = (fillter , data_update) => {
     })
 }
 
+let countShop = () => {
+    return new Promise(async(resolve, reject) => {
+        try{
+            let quanity = await ShopModel.countShop() ; 
+
+            if(quanity){
+               
+                resolve(quanity);
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(false);
+        }
+    })
+}
 
 let updateShopInfor = (fillter , data_update) => {
     return new Promise(async(resolve, reject) => {
@@ -142,5 +158,6 @@ export default {
     getShopById,
     getShopByIdUser, 
     updateShopInfor,
-    updateShopImage
+    updateShopImage,
+    countShop
 }

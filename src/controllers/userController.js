@@ -151,4 +151,13 @@ let getListUser = async(req, res) => {
         res.send({result: false, message: "không tìm thấy dữ liệu"});
     }
 }
-export default  {regissterUser, loginUser, updateUser, checkPassUser, updateImgUser, getNormalUser, verifyEmail, getListUser} ; 
+let getQuanity = async(req, res) => {
+    let result = await user.getQuanity() ; 
+    if(result){
+        res.status(200).send({result: result, message: null}); 
+    }else{
+        res.send({result: false, message: "không tìm thấy dữ liệu"});
+    }
+}
+
+export default  {regissterUser, loginUser, updateUser, checkPassUser, updateImgUser, getNormalUser, verifyEmail, getListUser, getQuanity} ; 

@@ -193,4 +193,21 @@ let getListUser = () => {
     })
 }
 
-export default {createNew, loginUser, updateUser, checkPassUser, updateImageUser, getNormalUser, verifyEmail, getListUser} ; 
+let getQuanity = () => { 
+    return new Promise(async (resolve, reject) => {
+        try {
+            let quanity = await userModel.getQuanity(); 
+            if(quanity){
+                resolve(quanity) ; 
+              
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(false); 
+
+        }
+    })
+}
+
+export default {createNew, loginUser, updateUser, checkPassUser, updateImageUser, getNormalUser, verifyEmail, getListUser, getQuanity} ; 

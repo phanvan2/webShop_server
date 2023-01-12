@@ -19,7 +19,9 @@ ShopSchema.statics = {
     createNew(item) {
         return this.create(item) ;
     },
-
+    countShop(){
+        return this.count({}).exec() ;
+    },
     countByIdUser(idUser){
         return this.count({"idUser": idUser}).exec();
     },

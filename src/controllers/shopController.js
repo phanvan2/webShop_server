@@ -25,7 +25,6 @@ let storageImageProduct = multer.diskStorage({
     }
 
 }); 
-
 let ImgShopUploadFile = multer({
     storage: storageImageProduct,
 
@@ -173,6 +172,15 @@ let getStatistical = async(req, res) => {
 
 }
 
+let countShop  = async(req, res) => {
+    let result = await shop.countShop(); 
+        console.log(result)
+        if(result){
+            res.send((result).toString());
+        }else{
+            res.send({result: [], message: transError.error_data}); 
+        }
+}
 
 export default {
     createNew,
@@ -180,5 +188,6 @@ export default {
     getShopByIdUser,
     updateShopInfor,
     updateShopImage,
-    getStatistical
+    getStatistical,
+    countShop
 }
