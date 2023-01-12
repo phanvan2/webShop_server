@@ -20,6 +20,8 @@ let initRouter = (app) => {
     router.post("/check-pass-user/:idUser", user.checkPassUser);
     router.get("/get-normal-user/:idUser", user.getNormalUser) ; 
     router.post("/user/active-email", user.verifyEmail);
+    // router.get("/getQuanityUser", user.getQuanity) ;
+    router.get("/get-list-user", user.getListUser) ; 
     // router.post("/user/change-password/", user.changePassWord) ; 
 
     router.post("/add-new-product/", product.createNewProduct); // thêm sản phẩm   

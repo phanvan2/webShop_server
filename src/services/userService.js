@@ -176,5 +176,21 @@ let verifyEmail = (idUser) => {
     })
 }; 
 
+let getListUser = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let listUser = await userModel.getListUser(); 
+            if(listUser){
+                resolve(listUser) ; 
+              
+            }else{
+                resolve(false);
+            }
+        } catch (error) {
+            reject(false); 
 
-export default {createNew, loginUser, updateUser, checkPassUser, updateImageUser, getNormalUser, verifyEmail} ; 
+        }
+    })
+}
+
+export default {createNew, loginUser, updateUser, checkPassUser, updateImageUser, getNormalUser, verifyEmail, getListUser} ; 

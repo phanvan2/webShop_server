@@ -41,6 +41,9 @@ userSchema.statics = {
     findUserById(idUser){
         return this.findById(idUser).exec();
     },
+    getListUser(){
+        return this.find({}).exec() ; 
+    }
   
 }
 export default mongoose.model("user", userSchema) ; 
