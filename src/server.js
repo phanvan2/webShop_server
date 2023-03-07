@@ -12,6 +12,7 @@ const app = express();
 // const upload = multer();
 // app.use(upload.array);
 
+// hello js 
 connectDB();
 
 app.use(cors());
